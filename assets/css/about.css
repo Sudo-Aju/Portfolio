@@ -1,0 +1,1097 @@
+/* ============ About me — la chemise kraft ============
+   Un seul objet : une chemise cartonnée ouverte à plat, vue de dessus. À gauche
+   une pile de tirages pincée dans un cadre perforé, à droite quatre fiches à
+   onglets empilées en escalier (la rouge porte le hub « créa de contenu »),
+   en bas le post-it « Comment j'♥ taffer ». Les polices --type / --mono /
+   --hand sont surchargées en ligne par about.js quand l'admin en choisit.
+   Le bloc .about-root / .about-placeholder de site.css reste (le placeholder
+   sert aussi à shorts.js et dividers.js) : cette feuille le surcharge. */
+
+.about-root {
+  /* matières */
+  --kraft-shade: rgba(120, 80, 30, .10);   /* voile posé sur carton-2 */
+  --kraft-back:  rgba(60, 40, 15, .22);    /* volet arrière, plus sombre */
+  --kraft-flat:  #cfae7c;                  /* couleur unie des trous de perforation */
+  --paper:       #f7f3ea;                  /* fiche « description », étiquette, mat photo */
+  --paper-grid:  #eef1ec;                  /* fiche « cv » (quadrillé) */
+  --paper-sage:  #e6ead6;                  /* fiche « hobbies » (lignée) */
+  --paper-red:   #c9463d;                  /* fiche « créa de contenu » */
+  --postit:      #f5df7a;                  /* carte « comment j'♥ taffer » */
+  --ink-paper:   #23201c;                  /* texte sur papier, indépendant du thème */
+  --ink-red:     #c8342c;                  /* note manuscrite, tampon, filets */
+  --cream:       #f7f0e4;                  /* texte sur la fiche rouge */
+  --rule:        rgba(60, 90, 150, .16);   /* lignes / quadrillage */
+  --shadow-k:    .42;                      /* intensité des ombres portées */
+  --type: 'Special Elite', 'Courier New', Courier, monospace;   /* machine à écrire */
+  --mono: 'IBM Plex Mono', 'Courier New', monospace;            /* lecture */
+  --hand: 'Caveat', 'Segoe Script', cursive;                    /* manuscrit */
+  /* Hauteur du cadre photo : 410 px à 1440 × 900 ; sur une fenêtre plus basse
+     la chemise perd de la hauteur (§5) et le cadre suit, pour que la note et
+     le post-it gardent leur place dessous (266 px au plus court). Valeur fixe
+     par défaut : une variable invalide au calcul mettrait la hauteur à auto. */
+  --frame-h: 410px;
+
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: calc(var(--chrome-h) + 22px) 40px 30px;
+  overflow-x: clip;
+}
+.about-placeholder { align-self: center; }
+
+/* Le conteneur ne connaît que sa taille : la chemise et son volet arrière
+   sont posés dedans en absolu. À 1440 × 900 : 1240 × 744, la page ne défile pas. */
+.folder-wrap {
+  position: relative;
+  width: min(1240px, 100%);
+  height: max(600px, min(744px, 100vh - var(--chrome-h) - 52px));
+  height: max(600px, min(744px, 100svh - var(--chrome-h) - 52px));
+}
+@supports (height: 1svh) {
+  .about-root { --frame-h: clamp(266px, calc(100svh - 482px), 410px); }
+}
+.folder-wrap[hidden] { display: none; }
+.about-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+.folder-back {
+  position: absolute;
+  inset: 8px -12px -8px -12px;
+  z-index: 0;
+  border-radius: 8px;
+  background: linear-gradient(var(--kraft-back), var(--kraft-back)), url(../img/carton-2.jpg);
+  background-size: 100% 100%, 260px 260px;
+  box-shadow: 0 24px 50px -24px rgba(20, 15, 5, var(--shadow-k));
+  transform: rotate(-.5deg);
+}
+.folder {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  padding: 42px 44px 40px;
+  display: grid;
+  grid-template-columns: 440px minmax(0, 1fr);
+  gap: 36px;
+  border-radius: 6px;
+  background: url(../img/carton-2.jpg) 0 0 / 260px 260px;
+  box-shadow: 0 30px 60px -28px rgba(20, 15, 5, var(--shadow-k)), 0 2px 4px rgba(0, 0, 0, .14), inset 0 0 0 1px rgba(255, 255, 255, .22);
+}
+/* Le voile teinté est un pseudo-élément (et non un dégradé dans background) :
+   la texture reste strictement identique dans les deux thèmes, seul le voile
+   change. z-index négatif = au-dessus du fond, sous tout le contenu. */
+.folder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--kraft-shade);
+  pointer-events: none;
+}
+/* Pli de la chemise, entre les deux colonnes. */
+.folder::before {
+  content: '';
+  position: absolute;
+  left: 500px;
+  top: 24px;
+  bottom: 24px;
+  width: 2px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, .18), rgba(0, 0, 0, .08));
+  pointer-events: none;
+}
+
+/* Onglet latéral au nom vertical. */
+.folder-side {
+  position: absolute;
+  right: -34px;
+  top: 130px;
+  width: 34px;
+  height: 280px;
+  z-index: 1;
+  padding: 10px 0;
+  background: linear-gradient(rgba(60, 40, 15, .18), rgba(60, 40, 15, .18)), url(../img/carton-2.jpg);
+  background-size: 100% 100%, 260px 260px;
+  border-radius: 0 8px 8px 0;
+  box-shadow: 3px 2px 6px rgba(0, 0, 0, .16);
+  writing-mode: vertical-rl;
+  font: 13px/34px var(--type);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--ink-paper);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Pinces (symboles #ab-bulldog*, #ab-binder), jamais animées (drop-shadow
+   statique). `color` = couleur de la tôle (currentColor dans le symbole) :
+   objets colorés, identiques dans les deux thèmes. */
+.clip {
+  position: absolute;
+  overflow: visible;
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, .35));
+  pointer-events: none;
+}
+/* Grande bulldog dorée : 96 × 72 en « meet » dans 200 × 96 → 128 × 96 visuels,
+   l'anse au-dessus du bord de la chemise, la bouche 68 px dedans. */
+.folder-clamp {
+  left: 50%;
+  top: -28px;
+  width: 200px;
+  height: 96px;
+  z-index: 6;
+  color: #d8a93c;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, .35));
+}
+
+/* Étiquette dactylographiée, scotchée. */
+.folder-label {
+  position: absolute;
+  left: 40px;
+  top: 12px;
+  width: 300px;
+  min-height: 58px;
+  z-index: 5;
+  padding: 9px 14px 8px;
+  background: var(--paper);
+  border: 1px solid #d9d2c2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12);
+  color: var(--ink-paper);
+  transform: rotate(-1.2deg);
+}
+.label-name {
+  margin: 0;
+  font: 17px/1.25 var(--type);
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.label-title {
+  margin: 3px 0 0;
+  font: 10.5px/1.4 var(--mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #6d675c;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.tape {
+  position: absolute;
+  width: 90px;
+  height: 22px;
+  background: rgba(255, 250, 225, .55);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .08);
+  clip-path: polygon(0 0, 100% 0, 97% 25%, 100% 50%, 97% 75%, 100% 100%, 0 100%, 3% 75%, 0 50%, 3% 25%);
+  pointer-events: none;
+}
+.folder-label .tape { top: -10px; left: 50%; transform: translateX(-50%) rotate(-3deg); }
+
+/* ---- Colonne gauche : photo, tampon, note, post-it ---- */
+.col-left { position: relative; }
+
+.photo-frame {
+  position: absolute;
+  left: 20px;
+  top: 36px;
+  /* Toujours carré : la largeur suit la hauteur, quelle que soit la fenêtre. */
+  width: var(--frame-h);
+  height: var(--frame-h);
+  margin: 0;
+  z-index: 2;
+  background: #efe8d8;
+  border-radius: 3px;
+  box-shadow: 0 10px 24px -12px rgba(0, 0, 0, .5), 0 1px 2px rgba(0, 0, 0, .15);
+  transform: rotate(-1.5deg);
+  transition: transform .4s ease;
+}
+.photo-frame:hover { transform: rotate(-.5deg); }
+/* Perforations : quatre rangées de trous (un dégradé radial par bord), sans
+   mask. `space` répartit les trous et fait coïncider ceux des coins. */
+.photo-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    radial-gradient(circle, var(--kraft-flat) 0 2.6px, rgba(0, 0, 0, .22) 2.8px 3.4px, transparent 3.9px) 0 0 / 16px 16px space no-repeat,
+    radial-gradient(circle, var(--kraft-flat) 0 2.6px, rgba(0, 0, 0, .22) 2.8px 3.4px, transparent 3.9px) 0 100% / 16px 16px space no-repeat,
+    radial-gradient(circle, var(--kraft-flat) 0 2.6px, rgba(0, 0, 0, .22) 2.8px 3.4px, transparent 3.9px) 0 0 / 16px 16px no-repeat space,
+    radial-gradient(circle, var(--kraft-flat) 0 2.6px, rgba(0, 0, 0, .22) 2.8px 3.4px, transparent 3.9px) 100% 0 / 16px 16px no-repeat space;
+}
+/* La pile de tirages occupe tout le cadre ; chaque tirage est posé en absolu
+   dans la marge de 24 px du passe-partout. Position dans la pile = classe
+   pos-0 (devant), pos-1, pos-2 (visibles derrière, décalés et tournés),
+   pos-back (le reste, caché). --to = transform de repos, repris par
+   l'animation « le tirage part derrière » comme point d'arrivée. */
+.photo-stack {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  outline: none;
+  touch-action: pan-y;
+}
+.photo-stack.is-pile { cursor: pointer; }
+.photo-stack:focus-visible { box-shadow: 0 0 0 3px var(--ink-red); }
+.photo-print {
+  --to: rotate(2deg);
+  --op: 1;
+  position: absolute;
+  /* Tirage au plus grand : juste la bande de perforations autour. */
+  inset: 20px 20px 24px;
+  padding: 7px;
+  background: #fff;
+  box-shadow: 0 6px 14px -6px rgba(0, 0, 0, .45);
+  transform: var(--to);
+  transition: transform .4s cubic-bezier(.22, .8, .2, 1), opacity .4s;
+}
+.photo-print.pos-0 { z-index: 3; }
+.photo-print.pos-1 { --to: translate(7px, 5px) rotate(-3deg); z-index: 2; }
+.photo-print.pos-2 { --to: translate(-6px, 9px) rotate(4.5deg); z-index: 1; }
+.photo-print.pos-back { --to: translate(0, 7px); --op: 0; z-index: 0; opacity: var(--op); }
+/* Le tirage du dessus glisse vers la droite en tournant, passe sous la pile
+   à mi-course (z-index) et se pose à sa nouvelle place ; s'il rejoint les
+   tirages cachés (--op: 0), il ne s'efface qu'une fois dessous. */
+@keyframes abPrintOut {
+  0%   { transform: rotate(2deg); z-index: 4; opacity: 1; }
+  48%  { transform: translate(58%, 4%) rotate(9deg) scale(.96); z-index: 4; }
+  52%  { z-index: 0; }
+  60%  { opacity: 1; }
+  100% { transform: var(--to); z-index: 0; opacity: var(--op, 1); }
+}
+.photo-print.leaving {
+  animation: abPrintOut .42s cubic-bezier(.3, .7, .3, 1) both;
+  will-change: transform;
+}
+/* Points de pagination : posés sur la bande basse du passe-partout, entre le
+   tirage (24 px) et la rangée de trous (centrée à 8 px du bord). */
+.photo-dots {
+  position: absolute;
+  left: 20px;
+  top: calc(36px + var(--frame-h) - 22px);
+  width: var(--frame-h);
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+}
+.photo-dots .dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(60, 40, 15, .3);
+  cursor: pointer;
+  pointer-events: auto;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.photo-dots .dot.is-on { background: var(--ink-red); }
+.photo-dots .dot:focus-visible { outline: 2px solid var(--ink-red); outline-offset: 2px; }
+.photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+  pointer-events: none;
+}
+.photo-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+  background: #d9d5cb;
+  color: #6d675c;
+  font: 11px/1.5 var(--type);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  text-align: center;
+}
+/* Bulldog vert menthe à logo : sa face (y 40–68) chevauche le bord haut du
+   tirage, qui commence à 24 px. */
+/* Pince sur le bord haut du cadre, décalée vers la droite (entre l'étiquette et
+   le tampon) et remontée : sa mâchoire ne mord que la marge blanche du tirage,
+   jamais la photo. */
+.clip-photo {
+  left: 72%;
+  top: -34px;
+  width: 77px;
+  height: 58px;
+  z-index: 6;
+  color: #93d3b6;
+  transform: translateX(-50%);
+}
+
+/* Corps fixe de 11 px, lisible (la spec) : « CONFIDENTIEL » fait 79 px, il
+   tient entier dans les 80 px libres du disque sans interlettrage ; un mot
+   plus long se coupe sur deux lignes plutôt que de rapetisser. */
+.stamp {
+  position: absolute;
+  left: 350px;
+  top: 0;
+  width: 90px;
+  height: 90px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border-radius: 50%;
+  background: var(--ink-red);
+  color: #fff;
+  font: 11px/1.15 var(--type);
+  letter-spacing: 0;
+  text-transform: uppercase;
+  text-align: center;
+  overflow: hidden;
+  hyphens: auto;
+  overflow-wrap: anywhere;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, .25);
+  transform: rotate(-12deg);
+  pointer-events: none;
+}
+.stamp::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(255, 255, 255, .7);
+}
+
+/* Note manuscrite sous le cadre : jusqu'à trois lignes (80 caractères tiennent
+   toujours), et au-dessus du post-it dans l'empilement pour qu'aucun mot saisi
+   ne disparaisse sous lui. */
+.note {
+  position: absolute;
+  right: 28px;
+  top: calc(var(--frame-h) + 36px);
+  max-width: 300px;
+  margin: 0;
+  z-index: 3;
+  text-align: center;
+  font: 22px/1.1 var(--hand);
+  color: var(--ink-red);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transform: rotate(-4deg);
+}
+
+/* Le post-it est un enfant de .folder (après la pile dans le DOM : sur
+   téléphone il vient après les fiches), posé en absolu sous la note : quand son
+   texte s'allonge il grandit vers le bas, dans la marge de la chemise, sans
+   jamais remonter sur elle. Son haut (--frame-h + 156 px, soit 566 px à
+   1440 × 900) laisse la place à une note de trois lignes. */
+.how-card {
+  position: absolute;
+  left: 60px;
+  /* --how-gap : posé par about.js (fitFrame) — sous la note s'il y en a une,
+     26 px sous le cadre sinon ; 156 px à défaut (note de trois lignes). */
+  top: calc(var(--frame-h) + var(--how-gap, 156px));
+  width: 300px;
+  min-height: 150px;
+  max-height: 160px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 18px 14px;
+  background: linear-gradient(#ecd15f 0 12px, var(--postit) 12px);
+  box-shadow: 0 8px 16px -10px rgba(0, 0, 0, .4);
+  color: var(--ink-paper);
+  transform: rotate(4deg);
+  transition: transform .4s ease;
+}
+.how-card:hover { transform: rotate(2.5deg); }
+.how-card .tape { top: -9px; left: 26px; transform: rotate(-8deg); }
+.how-title {
+  flex-shrink: 0;
+  margin: 0 0 8px;
+  font: 700 26px/1 var(--hand);
+}
+.how-heart {
+  width: 20px;
+  height: 18px;
+  fill: var(--ink-red);
+  vertical-align: -3px;
+}
+.how-text {
+  min-height: 0;
+  overflow: hidden;
+  font: 12.5px/1.45 var(--mono);
+}
+.how-text p, .how-text ul, .how-text .dated { margin: 0 0 6px; }
+.how-text ul { padding-left: 16px; }
+.how-text.scrolls {
+  -webkit-mask-image: linear-gradient(#000 calc(100% - 18px), transparent);
+  mask-image: linear-gradient(#000 calc(100% - 18px), transparent);
+}
+/* Post-it cliquable : ouvert en grand dans un calque fixe pour lire tout le
+   texte ; le petit reste en place (la copie évite tout saut de mise en page). */
+.how-card[role="button"] { cursor: pointer; }
+.how-card[role="button"]:focus-visible { outline: 2px solid var(--ink-red); outline-offset: 4px; }
+.how-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+.how-overlay.in { opacity: 1; }
+.how-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 15, 5, .38);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.how-card.how-big {
+  position: relative;
+  left: auto; top: auto;
+  width: min(560px, 92vw);
+  min-height: 0;
+  max-height: min(80vh, 660px);
+  padding: 28px 32px 28px;
+  transform: rotate(-1.5deg) scale(.92);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .55), 0 2px 6px rgba(0, 0, 0, .2);
+  cursor: default;
+  transition: transform .3s cubic-bezier(.2, .8, .2, 1);
+}
+.how-overlay.in .how-card.how-big { transform: rotate(-1.5deg) scale(1); }
+.how-card.how-big:hover { transform: rotate(-1.5deg) scale(1); }
+.how-card.how-big .how-title { font-size: 36px; margin-bottom: 14px; }
+.how-card.how-big .how-heart { width: 28px; height: 25px; vertical-align: -4px; }
+.how-card.how-big .how-text {
+  overflow: auto;
+  padding-right: 8px;
+  font-size: 15.5px;
+  line-height: 1.55;
+  -webkit-mask-image: none;
+  mask-image: none;
+  scrollbar-width: thin;
+}
+.how-card.how-big .tape { left: 50%; transform: translateX(-50%) rotate(-3deg); width: 110px; }
+.how-close {
+  position: absolute;
+  top: 10px; right: 12px;
+  width: 32px; height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, .08);
+  color: var(--ink-paper);
+  font: 15px/1 var(--mono);
+  cursor: pointer;
+}
+.how-close:hover, .how-close:focus-visible { background: rgba(0, 0, 0, .18); outline: none; }
+@media (max-width: 1000px) {
+  .how-card.how-big { width: 92vw; padding: 22px 18px 22px; }
+  .how-card.how-big .how-title { font-size: 30px; }
+  .how-card.how-big .how-text { font-size: 15px; overflow: auto; }
+}
+/* Autocollants : enfants du post-it, ils le suivent sur tous les écrans. */
+.sticker {
+  position: absolute;
+  overflow: visible;
+  paint-order: stroke;
+  stroke: #fff;
+  stroke-width: 6;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, .28));
+  pointer-events: none;
+}
+.sticker-heart { top: -18px; right: -18px; width: 56px; height: 52px; fill: #D63F64; transform: rotate(14deg); }
+.sticker-star  { right: -74px; bottom: -8px; width: 64px; height: 64px; fill: #F3D163; transform: rotate(-10deg); }
+
+/* ---- Pile de fiches ---- */
+.stack { position: relative; isolation: isolate; }
+.tabs { position: absolute; inset: 0; margin: 0; padding: 0; pointer-events: none; }
+.tab {
+  position: absolute;
+  top: 120px;
+  height: 41px;                 /* déborde de 1 px sur la fiche : pas de jour */
+  width: 24%;
+  margin: 0;
+  padding: 0 9px;
+  pointer-events: auto;
+  border: 1px solid rgba(0, 0, 0, .09);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  background: var(--paper);
+  color: var(--ink-paper);
+  font: 12px/1 var(--type);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  box-shadow: 0 -3px 6px rgba(0, 0, 0, .08);
+  -webkit-appearance: none;
+  appearance: none;
+}
+.tab[data-key="desc"]    { left: 0; }
+.tab[data-key="cv"]      { left: 25.33%; background: var(--paper-grid); }
+.tab[data-key="hobbies"] { left: 50.67%; background: var(--paper-sage); }
+.tab[data-key="content"] { left: 76%; background: var(--paper-red); color: var(--cream); }
+.tab:not([data-depth="0"]) { filter: brightness(.96); }
+.tab:focus-visible { outline: 2px solid var(--ink-red); outline-offset: 3px; }
+
+.card {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 160px;
+  bottom: 0;
+  border: 1px solid rgba(0, 0, 0, .07);
+  border-radius: 3px;
+  background: var(--paper);
+  color: var(--ink-paper);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, .14);
+}
+.card:not(.is-front) { cursor: pointer; }
+/* L'ombre portée de la fiche de devant vit sur un pseudo-élément : on n'anime
+   que son opacité, jamais l'ombre elle-même. */
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 22px 40px -18px rgba(20, 15, 5, var(--shadow-k));
+  opacity: 0;
+  transition: opacity .4s;
+  pointer-events: none;
+}
+.card.is-front::after { opacity: 1; }
+.card[data-key="desc"] {
+  background: linear-gradient(90deg, transparent 24px, rgba(200, 52, 44, .35) 24px 25px, transparent 25px), var(--paper);
+}
+.card[data-key="cv"] {
+  background:
+    linear-gradient(var(--rule) 1px, transparent 1px) 0 0 / 20px 20px,
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px) 0 0 / 20px 20px,
+    var(--paper-grid);
+}
+.card[data-key="hobbies"] { background: var(--paper-sage); }
+.card[data-key="hobbies"] .card-text { background: repeating-linear-gradient(transparent 0 25px, var(--rule) 25px 26px); }
+.card[data-key="hobbies"] .card-text p,
+.card[data-key="hobbies"] .card-text ul { margin-bottom: 26px; }   /* reste calé sur les lignes */
+.card[data-key="content"] {
+  background: var(--paper-red);
+  color: var(--cream);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, .14), inset 0 0 0 1px rgba(255, 255, 255, .22);
+}
+.card[data-key="content"] .card-title::after { background: var(--cream); }
+/* Small profile cards get their own visual signature: an event stamp, a skills badge, and a community seal. */
+.card[data-key="desc"]::before,
+.card[data-key="cv"]::before,
+.card[data-key="hobbies"]::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: 20px;
+  right: 26px;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  font-family: var(--type);
+  font-weight: 700;
+  line-height: 1;
+}
+.card[data-key="desc"]::before {
+  content: '03';
+  width: 58px;
+  height: 58px;
+  border: 2px solid rgba(200, 52, 44, .78);
+  border-radius: 50%;
+  color: var(--ink-red);
+  font-size: 22px;
+  transform: rotate(8deg);
+  box-shadow: inset 0 0 0 4px rgba(200, 52, 44, .08);
+}
+.card[data-key="cv"]::before {
+  content: '$52K+';
+  width: 88px;
+  height: 48px;
+  border: 1.5px dashed rgba(53, 87, 101, .8);
+  border-radius: 7px;
+  background: repeating-linear-gradient(135deg, rgba(53, 87, 101, .08) 0 5px, transparent 5px 10px);
+  color: #355765;
+  font-size: 15px;
+  transform: rotate(-4deg);
+}
+.card[data-key="hobbies"]::before {
+  content: '40+';
+  width: 66px;
+  height: 66px;
+  border: 2px dotted rgba(91, 119, 65, .85);
+  border-radius: 44% 56% 46% 54%;
+  color: #526d39;
+  font: 700 23px/1 var(--hand);
+  transform: rotate(7deg);
+  box-shadow: 0 0 0 5px rgba(91, 119, 65, .08);
+}
+.card[data-key="desc"] .card-title,
+.card[data-key="cv"] .card-title,
+.card[data-key="hobbies"] .card-title { padding-right: 112px; }
+
+
+.card-body {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  padding: 30px 36px 28px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  transition: opacity .22s;
+}
+.card:not(.is-front) .card-body { opacity: 0; }
+.card-body.scrolls {
+  -webkit-mask-image: linear-gradient(#000 calc(100% - 30px), transparent);
+  mask-image: linear-gradient(#000 calc(100% - 30px), transparent);
+}
+.card-title {
+  position: relative;
+  height: 40px;
+  margin: 0 0 12px;
+  font: 20px/40px var(--type);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 48px;
+  height: 2px;
+  background: var(--ink-red);
+}
+.card-text {
+  max-width: 62ch;
+  font: 14.5px/26px var(--mono);
+  overflow-wrap: anywhere;
+}
+.card-text p { margin: 0 0 14px; }
+.card-text ul { margin: 0 0 14px; padding-left: 20px; }
+.card-text li { margin: 0; }
+.dated { display: grid; grid-template-columns: 118px 1fr; gap: 0 14px; }
+.dated-when { font-family: var(--type); font-size: 13.5px; letter-spacing: .02em; }
+.card-empty { font-style: italic; opacity: .6; }
+
+/* ---- Hub « créa de contenu » (fiche rouge) : handle, plateformes, tuiles ---- */
+.hub { margin-top: 2px; }
+.hub-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px 20px;
+  margin: 0 0 18px;
+}
+.hub-handle {
+  margin: 0;
+  font: 700 38px/1 var(--hand);
+  letter-spacing: .01em;
+  overflow-wrap: anywhere;
+}
+.hub-platforms { display: flex; flex-wrap: wrap; gap: 6px; margin-left: auto; }
+.hub-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 66px;
+  padding: 8px 8px 6px;
+  border: 1px solid rgba(255, 255, 255, .35);
+  border-radius: 8px;
+  color: inherit;
+  text-decoration: none;
+  text-align: center;
+  transition: background .2s, transform .2s;
+}
+a.hub-chip:hover { background: rgba(255, 255, 255, .12); transform: translateY(-2px); }
+a.hub-chip:focus-visible { outline: 2px solid var(--cream); outline-offset: 2px; }
+.hub-icon { width: 22px; height: 22px; fill: currentColor; }
+.hub-count { font: 700 13px/1.1 var(--type); }
+.hub-count span {
+  display: block;
+  margin-top: 2px;
+  font: 9.5px/1.2 var(--mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  opacity: .8;
+}
+.hub-section { margin: 0 0 20px; }
+.hub-section h3 {
+  margin: 0 0 8px;
+  font: 13px/1.2 var(--type);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  opacity: .9;
+}
+.hub-grid { display: grid; gap: 10px; }
+.hub-videos .hub-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.hub-photos .hub-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.hub-collab .hub-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+/* Tuiles au ratio fixe (pseudo-élément de hauteur) : 9:16, carré, 16:9. */
+.hub-tile, .hub-photo {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, .18);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .22);
+  color: inherit;
+}
+.media-placeholder {
+  border: 1px dashed rgba(35, 32, 28, .48);
+  background: repeating-linear-gradient(135deg, rgba(35, 32, 28, .08) 0 10px, transparent 10px 20px), #e9e2d6;
+  color: var(--ink-paper);
+}
+.media-placeholder-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 10px;
+  text-align: center;
+  font: 700 11px/1.3 var(--type);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.media-placeholder-play { font: 26px/1 Arial, sans-serif; }
+.media-placeholder-label small { font: 9px/1.4 var(--mono); letter-spacing: .12em; }
+.hub-tile::before, .hub-photo::before { content: ''; display: block; padding-top: 56.25%; }
+.hub-tile.tile-9x16::before { padding-top: 177.78%; }
+.hub-photo::before { padding-top: 100%; }
+.hub-tile .thumb, .hub-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hub-photo.is-broken img { display: none; }
+a.hub-tile, a.hub-photo { transition: transform .2s ease; }
+a.hub-tile:hover, a.hub-photo:hover { transform: translateY(-2px); }
+a.hub-tile:focus-visible, a.hub-photo:focus-visible { outline: 2px solid var(--cream); outline-offset: 2px; }
+
+.hub-videos .hub-grid{align-items:start}
+.hub-tile.hub-reel{aspect-ratio:9/16;min-width:0;background:#101419}
+.hub-tile.hub-reel::before{display:none;padding:0}
+.hub-reel-frame{position:absolute;top:0;left:50%;right:auto;width:max(100%,320px);height:100%;max-width:none;transform:translateX(-50%);border:0;display:block;background:#101419}
+.hub-reel-caption{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:22px 7px 7px;background:linear-gradient(transparent,rgba(0,0,0,.78));color:#fff;font:700 9px/1.3 var(--mono);letter-spacing:.03em;pointer-events:none}
+
+.hub-tile .tile-label { font-family: var(--type); }
+.hub-tile:hover .tile-label, .hub-tile:focus-visible .tile-label { opacity: 1; transform: none; }
+.hub-badge {
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  z-index: 3;
+  width: 24px;
+  height: 24px;
+  padding: 5px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, .55);
+  color: #fff;
+  fill: currentColor;
+  pointer-events: none;
+}
+
+/* Binder clip rouge sur le bord gauche de la fiche de devant : tournée de
+   −90°, ses bras pointent hors de la fiche, le dos (y 27–37 du symbole) se
+   pose sur le bord, la bouche mord 25 px dans la fiche. Centre à (4 px, 62 px). */
+.clip-edge {
+  left: -28px;
+  top: 30px;
+  width: 64px;
+  height: 64px;
+  color: #c8342c;
+  transform: rotate(-90deg);
+  opacity: 0;
+  transition: opacity .25s .25s;
+}
+.card.is-front .clip-edge { opacity: 1; }
+/* Petite bulldog jaune à pois sur le haut de la fiche CV (à la place du trombone). */
+.clip-cv {
+  right: 44px;
+  top: -14px;
+  width: 60px;
+  height: 45px;
+  color: #f0c344;
+  transform: rotate(3deg);
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .3));
+}
+
+/* ---- Profondeur : portée par la fiche ET par son onglet ---- */
+.stack [data-depth="0"] { transform: none;                    z-index: 4; }
+.stack [data-depth="1"] { transform: translate(4px, -40px);   z-index: 3; }
+.stack [data-depth="2"] { transform: translate(8px, -80px);   z-index: 2; }
+.stack [data-depth="3"] { transform: translate(12px, -120px); z-index: 1; }
+.card, .tab { transition: transform .38s cubic-bezier(.22, .8, .2, 1); }
+.card-body, .card-body.scrolls { transition: opacity .22s; }
+/* Survol (classe posée par about.js sur l'onglet et sa fiche ensemble) : levée de 4 px. */
+.stack .raised[data-depth="0"] { transform: translate(0, -4px);     transition-duration: .15s; }
+.stack .raised[data-depth="1"] { transform: translate(4px, -44px);  transition-duration: .15s; }
+.stack .raised[data-depth="2"] { transform: translate(8px, -84px);  transition-duration: .15s; }
+.stack .raised[data-depth="3"] { transform: translate(12px, -124px); transition-duration: .15s; }
+
+/* ---- Entrée ---- */
+@keyframes abFolderIn { from { opacity: 0; transform: translateY(26px); } }
+@keyframes abDealIn   { from { opacity: 0; transform: translateY(-34px); } }
+@keyframes abPopIn    { from { opacity: 0; transform: scale(.6); } }
+.about-in .folder, .about-in .folder-back { animation: abFolderIn .55s cubic-bezier(.2, .75, .25, 1) both; }
+.about-in .card, .about-in .tab { animation: abDealIn .5s cubic-bezier(.2, .75, .25, 1) both; }
+.about-in [data-depth="3"] { animation-delay: .12s; }
+.about-in [data-depth="2"] { animation-delay: .19s; }
+.about-in [data-depth="1"] { animation-delay: .26s; }
+.about-in [data-depth="0"] { animation-delay: .33s; }
+.about-in .photo-frame { animation: abPopIn .55s cubic-bezier(.34, 1.3, .64, 1) .42s both; }
+.about-in .how-card    { animation: abPopIn .5s  cubic-bezier(.34, 1.3, .64, 1) .56s both; }
+.about-in .sticker-heart { animation: abPopIn .5s cubic-bezier(.34, 1.3, .64, 1) .68s both; }
+.about-in .sticker-star  { animation: abPopIn .5s cubic-bezier(.34, 1.3, .64, 1) .78s both; }
+
+/* ---- « On tire la fiche » : elle se soulève au-dessus de la pile, monte en
+   tournant un peu, puis se pose devant (transform: none = repos). ---- */
+@keyframes ficheLift {
+  0%   { transform: translate(var(--x0), var(--y0)); }
+  45%  { transform: translate(calc(var(--x0) / 2), calc(var(--y0) / 2 - 22px)) rotate(-1.1deg) scale(1.015); }
+  100% { transform: none; }
+}
+.card.lifting, .tab.lifting {
+  z-index: 20;
+  animation: ficheLift .46s cubic-bezier(.22, .8, .2, 1) both;
+  animation-delay: 0s;
+  will-change: transform;
+}
+.card.lifting::after { opacity: 1; }
+
+/* ============ Thème sombre : un objet clair sur un bureau sombre ============ */
+html[data-theme="dark"] .about-root {
+  --kraft-shade: rgba(40, 25, 5, .26);
+  --kraft-back:  rgba(20, 12, 2, .40);
+  --kraft-flat:  #a98a5e;
+  --paper: #efe9dc;
+  --paper-grid: #e6e9e3;
+  --paper-sage: #dde2cc;
+  --postit: #ecd66f;
+  --shadow-k: .85;
+}
+html[data-theme="dark"] .folder {
+  box-shadow: 0 40px 90px -30px rgba(0, 0, 0, .85), 0 2px 4px rgba(0, 0, 0, .4), inset 0 0 0 1px rgba(255, 255, 255, .08);
+}
+html[data-theme="dark"] .photo-empty { background: #3a3630; color: #bdb6a8; }
+
+/* ============ Bureau étroit (1001–1200 px : iPad paysage, petits portables) ============
+   La colonne gauche cède 120 px à la pile pour que les quatre onglets restent
+   entiers : « DESCRIPTION DE MOI » fait 111 px à 11 px ; à 1001 px la pile
+   fait 513 px et chaque onglet 123 px. Le tampon mord le coin de l'étiquette
+   (comme sur téléphone) au lieu de flotter entre les deux colonnes. */
+@media (min-width: 1001px) and (max-width: 1200px) {
+  .about-root { --frame-h: 300px; }
+  .folder { padding: 42px 32px 40px; grid-template-columns: 320px minmax(0, 1fr); gap: 24px; }
+  .folder::before { left: 364px; }
+  .folder-label { width: 260px; }
+  .photo-frame { left: 10px; }
+  .photo-dots { left: 10px; width: var(--frame-h); }
+  .stamp { left: 250px; z-index: 6; }
+  .note { right: 20px; max-width: 280px; }
+  .how-card { left: 40px; width: 260px; }
+}
+/* Onglets en 11 px sans interlettrage jusqu'à 1300 px : à 12 px,
+   « DESCRIPTION DE MOI » fait 130 px et l'onglet (24 % de la pile) ne les
+   atteint qu'au-delà de ≈ 1270 px de fenêtre — il s'ellipsait entre 1201 et
+   1270 px. À 1001 px (pile 513 px), l'onglet fait 123 px pour 111 px de texte. */
+@media (min-width: 1001px) and (max-width: 1300px) {
+  .tab { padding: 0 5px; font-size: 11px; letter-spacing: 0; }
+}
+@supports (height: 1svh) {
+  @media (min-width: 1001px) and (max-width: 1200px) {
+    .about-root { --frame-h: clamp(266px, calc(100svh - 482px), 360px); }
+  }
+}
+
+/* ============ Téléphone et tablette ============
+   Sous 1001 px (la pile n'aurait plus la place de quatre onglets lisibles), le
+   dossier devient une feuille verticale en flux : la page défile, les onglets
+   forment une grille 2 × 2 au-dessus de la seule fiche affichée. La feuille
+   est bornée à 640 px : sur tablette, elle reste un dossier et non un bandeau.
+   La largeur seule décide (about.js : phoneQuery, à garder alignée) : une
+   fenêtre large mais basse — MacBook avec la barre de Safari, ≈ 1280 × 620 —
+   garde la mise en page bureau, dont la chemise est bornée à 600 px de haut
+   (.folder-wrap) et le cadre à 266 px (--frame-h) ; au-delà la page défile. */
+@media (max-width: 1000px) {
+  .about-root { padding: calc(var(--chrome-h) + 8px) 12px 40px; }
+  .folder-wrap { width: 100%; max-width: 640px; height: auto; }
+  .folder {
+    position: relative;
+    inset: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 14px 30px;
+  }
+  .folder-back { inset: 6px -6px -6px -6px; }
+  .folder-side, .folder::before { display: none; }
+  /* Pince réduite (80 × 60 visuels) : sa bouche s'arrête à 30 px, au ras du
+     texte de l'étiquette (20 px de marge + 9 px de padding). */
+  .folder-clamp { width: 130px; height: 60px; top: -30px; }
+  .folder-label {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    margin: 0 0 12px;
+    padding-right: 70px;
+    transform: none;
+  }
+  /* col-left n'est plus positionnée : le tampon se cale sur le coin du dossier,
+     par-dessus le bout de l'étiquette. */
+  .col-left { position: static; display: flex; flex-direction: column; }
+  /* 72 px (et non 64) : à 8,5 px — le corps téléphone de la spec —
+     « CONFIDENTIEL » fait 61 px, il lui faut 64 px libres pour rester entier. */
+  .stamp {
+    left: auto;
+    top: 6px;
+    right: 8px;
+    width: 72px;
+    height: 72px;
+    z-index: 6;               /* par-dessus le bout de l'étiquette */
+    padding: 4px;
+    font-size: 8.5px;
+  }
+  .photo-frame, .note, .how-card { position: relative; left: auto; top: auto; right: auto; bottom: auto; }
+  /* Cadre carré (et non un bandeau de 340 px sur une feuille large) : au plus
+     440 px, centré au-delà. */
+  .photo-frame { width: 100%; max-width: 440px; height: 340px; margin: 6px auto 12px; }
+  @supports (aspect-ratio: 1) { .photo-frame { height: auto; aspect-ratio: 1; } }
+  .photo-print { inset: 18px; padding: 8px; }
+  .photo-dots { position: static; width: auto; margin: -4px 0 10px; }
+  .clip-photo { width: 76px; height: 57px; top: -36px; left: 50%; }
+  .note { max-width: none; margin: 0 auto 12px; text-align: center; font-size: 20px; -webkit-line-clamp: 3; transform: rotate(-3deg); }
+
+  .stack { height: auto; display: flex; flex-direction: column; }
+  /* Deux tranches de papier derrière la fiche (à droite et en bas). */
+  .stack::before, .stack::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    right: -4px;
+    top: 100px;
+    bottom: -5px;
+    z-index: -1;
+    background: var(--paper);
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .14);
+  }
+  .stack::after { left: 12px; right: -8px; top: 108px; bottom: -10px; filter: brightness(.97); }
+  .tabs {
+    order: -1;
+    position: static;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 6px;
+    pointer-events: auto;
+  }
+  .tab {
+    position: static;
+    width: auto;
+    height: 40px;
+    z-index: auto;
+    border-radius: 8px;
+    border-bottom: 1px solid rgba(0, 0, 0, .09);
+    font-size: 11.5px;
+    transform: none !important;
+    animation: none !important;
+  }
+  .tab[aria-selected="true"] { box-shadow: 0 3px 8px rgba(0, 0, 0, .18); filter: none; }
+  .tab[aria-selected="false"] { filter: brightness(.94); box-shadow: inset 0 -5px 8px -6px rgba(0, 0, 0, .35); }
+
+  .card:not(.is-front) { display: none; }
+  .card.is-front, .card.is-front.lifting {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    min-height: 240px;
+    z-index: auto;
+    transform: none !important;
+    animation: abCardIn .24s ease both;
+    animation-delay: 0s;
+    will-change: auto;
+  }
+  .card-body {
+    position: static;
+    padding: 22px 18px 24px;
+    overflow: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .card-text { font-size: 14.5px; max-width: none; }
+  .dated { grid-template-columns: 96px 1fr; }
+  .hub-handle { font-size: 32px; }
+  /* Bouche 14 px dans la fiche (< 18 px de padding) : elle ne mord pas le titre. */
+  .clip-edge { left: -25px; top: 26px; width: 46px; height: 46px; }
+  .clip-cv { right: 18px; top: -8px; width: 48px; height: 36px; }
+
+  .how-card {
+    width: calc(100% - 16px);
+    max-width: 420px;
+    min-height: 120px;
+    max-height: none;
+    margin: 26px 0 0 4px;
+    transform: rotate(1.5deg);
+  }
+  .how-card:hover { transform: rotate(1.5deg); }
+  .how-text { overflow: visible; }
+  .how-text.scrolls { -webkit-mask-image: none; mask-image: none; }
+  .sticker-heart { top: -16px; right: -6px; width: 44px; height: 41px; }
+  .sticker-star { right: -10px; bottom: -22px; width: 52px; height: 52px; }
+}
+@keyframes abCardIn { from { opacity: 0; transform: translateY(8px); } }
+/* Téléphone (sous 600 px) : le handle sur sa ligne, les quatre chips dessous ;
+   tuiles 9:16 par deux, photos par trois, collabs pleine largeur. */
+@media (max-width: 599px) {
+  .hub-head { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .hub-platforms { margin-left: 0; }
+  /* Quatre chips sur une ligne dans 302 px : 4 × 64 + 3 × 6. */
+  .hub-chip { min-width: 60px; padding: 7px 4px 5px; }
+  .hub-count { font-size: 12px; }
+  .hub-count span { font-size: 8px; letter-spacing: .04em; }
+  .hub-videos .hub-grid { grid-template-columns: minmax(0, 1fr); }
+  .hub-tile.hub-reel { width: min(100%, 320px); justify-self: center; }
+  .hub-photos .hub-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .hub-collab .hub-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-root * { transition-duration: 0s !important; animation: none !important; }
+}
