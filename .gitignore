@@ -1,0 +1,9 @@
+# macOS Finder metadata
+.DS_Store
+**/.DS_Store
+
+# Local editor and operating-system files
+.AppleDouble
+.LSOverride
+Thumbs.db
+.vscode/
