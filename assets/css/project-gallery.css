@@ -24,6 +24,7 @@
 @media(prefers-reduced-motion:reduce){.repo-media-chevron{transition:none}}
 .repo-media-cover.repo-media-logo{padding:28px;background:#271A35}
 .repo-media-cover.repo-media-branded{background:#271A35}
+.repo-media-cover.repo-media-black{background:#000}
 
 .repo-media-item img{cursor:zoom-in}
 .repo-media-item img:focus-visible{outline:3px solid var(--brand);outline-offset:3px}
