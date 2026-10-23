@@ -42,3 +42,4 @@
 /* The custom cursor layer sits behind native dialog top-layer content. */
 .repo-lightbox,.repo-lightbox *{cursor:auto!important}
 .repo-lightbox-close{cursor:pointer!important}
+.repo-media-cover.repo-media-navy{background:#001124}
