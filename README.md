@@ -9,6 +9,7 @@ Static portfolio website for GitHub Pages.
 - `contact.html` — contact page
 - `privacy.html` and `terms.html` — policy pages
 - `video-board.html` — standalone video work page
+- `CNAME` — custom domain for GitHub Pages
 
 Keep these pages in the repository root so their public URLs and relative asset links continue to work.
 
