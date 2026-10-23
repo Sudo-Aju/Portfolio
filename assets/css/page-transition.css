@@ -1,0 +1,29 @@
+.page-shutter {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  background: #fff;
+  pointer-events: none;
+  transform: translateY(-101%);
+  will-change: transform;
+}
+
+.page-shutter.is-closing {
+  animation: page-shutter-down 650ms cubic-bezier(.76, 0, .24, 1) forwards;
+}
+
+.page-shutter.is-opening {
+  transform: translateY(0);
+  animation: page-shutter-up 700ms cubic-bezier(.76, 0, .24, 1) forwards;
+}
+
+@keyframes page-shutter-down {
+  from { transform: translateY(-101%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes page-shutter-up {
+  from { transform: translateY(0); }
+  to { transform: translateY(-101%); }
+}
+

@@ -1,0 +1,32 @@
+(function(){
+  var projects = [{"title":"Fracture","cover":"assets/media/github/Fracture/Assets/Zine.png","label":"Embedded electronics · Mechanical keyboard","repo":"https://github.com/Sudo-Aju/Fracture"},{"title":"Galatchi","cover":"assets/media/github/Galatchi/Gallery/GalatchiZine.png","label":"Embedded electronics · Handheld project","repo":"https://github.com/Sudo-Aju/Galatchi"},{"title":"Elfin","cover":"assets/media/github/Elfin/Gallery/ElfinZine.png","label":"Embedded electronics · Microcontroller","repo":"https://github.com/Sudo-Aju/Elfin"},{"title":"AliPayBot","cover":"assets/media/github/AliPayBot/Gallery/Zine.png","label":"Embedded electronics · Robotics","repo":"https://github.com/Sudo-Aju/AliPayBot"},{"title":"Build Guild · Hyderabad","cover":"assets/media/github/BuildGuildHyderabad/poster2f.png","label":"Community · Hardware hackathon","repo":"https://github.com/Sudo-Aju/BuildGuildHyderabad"},{"title":"UsbHub","cover":"assets/media/github/UsbHub/README/README-detail-1.png","label":"Embedded electronics · USB hub","repo":"https://github.com/Sudo-Aju/UsbHub"},{"title":"SpiderBlink","cover":"assets/media/github/SpiderBlink/Gallery/Zine.png","label":"Embedded electronics · LED project","repo":"https://github.com/Sudo-Aju/SpiderBlink"},{"title":"Rova","cover":"assets/media/github/Rova/Gallery/zine.png","label":"Embedded electronics · Hardware project","repo":"https://github.com/Sudo-Aju/Rova"}];
+  var grid=document.getElementById('featuredProjectGrid');
+  if(!grid)return;
+  projects.forEach(function(project){
+    var card=document.createElement('a');
+    card.className='featured-project-card';
+    card.href=project.repo;
+    card.target='_blank';
+    card.rel='noopener noreferrer';
+    card.setAttribute('aria-label','Open GitHub repository for '+project.title+' in a new tab');
+    var image=document.createElement('img');
+    image.className='featured-project-cover';
+    image.src=project.cover;
+    image.alt=project.title+' promotional artwork';
+    image.loading='lazy';
+    image.decoding='async';
+    var copy=document.createElement('span');
+    copy.className='featured-project-copy';
+    var tag=document.createElement('span');
+    tag.className='featured-project-label';
+    tag.textContent=project.label;
+    var name=document.createElement('strong');
+    name.textContent=project.title;
+    var action=document.createElement('span');
+    action.className='featured-project-action';
+    action.textContent='View GitHub repository ↗';
+    copy.append(tag,name,action);
+    card.append(image,copy);
+    grid.appendChild(card);
+  });
+})();
