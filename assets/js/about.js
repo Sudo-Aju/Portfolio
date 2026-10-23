@@ -156,7 +156,7 @@
     '<stop offset="0" stop-color="#000" stop-opacity=".18"/><stop offset=".3" stop-color="#fff" stop-opacity=".55"/>' +
     '<stop offset="1" stop-color="#000" stop-opacity=".42"/></linearGradient>' +
     '<linearGradient id="ab-chrome" x1="0" y1="0" x2="1" y2="1">' +
-    '<stop offset="0" stop-color="#f4f6f8"/><stop offset=".5" stop-color="#9ba2a9"/><stop offset="1" stop-color="#e2e6e9"/></linearGradient>' +
+    '<stop offset="0" stop-color="#F8F3F9"/><stop offset=".5" stop-color="#93869D"/><stop offset="1" stop-color="#EEE8F2"/></linearGradient>' +
     '<pattern id="ab-dots" width="12" height="12" patternUnits="userSpaceOnUse">' +
     '<circle cx="3" cy="3" r="2.1" fill="#fff" fill-opacity=".9"/><circle cx="9" cy="9" r="2.1" fill="#fff" fill-opacity=".9"/></pattern>' +
     bulldog('ab-bulldog') + bulldog('ab-bulldog-dots', DOTS_TAB, DOTS_FACE) + bulldog('ab-bulldog-logo', '', LOGO) + BINDER +

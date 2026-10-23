@@ -1,8 +1,8 @@
 /* ============ Base / thèmes ============ */
 :root {
-  --bg: #fafaf7;
-  --ink: #171717;
-  --muted: #8a8a86;
+  --bg: #FAF7FB;
+  --ink: #271A35;
+  --muted: #716380;
   --chrome-h: 96px;
   /* Durée d'un cycle complet de la boucle d'animation de la home.
      Toutes les pièces animées partagent cette durée pour rester synchronisées. */
@@ -10,9 +10,9 @@
   color-scheme: light;
 }
 html[data-theme="dark"] {
-  --bg: #131316;
-  --ink: #f2f2ef;
-  --muted: #7d7d84;
+  --bg: #271A35;
+  --ink: #F8F3F9;
+  --muted: #C8B2E3;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -493,7 +493,7 @@ html.loaded .home-star          { animation: starBump   var(--loop) ease-in-out 
 .divider-player {
   flex: none;
   aspect-ratio: 16 / 9;
-  background: #101013;
+  background: #271A35;
   border: 2px solid #000;
   border-radius: 3px;
   overflow: hidden;
@@ -514,7 +514,7 @@ html.loaded .home-star          { animation: starBump   var(--loop) ease-in-out 
   font-family: 'IBM Plex Mono', monospace;
   font-size: 15px;
   letter-spacing: 0.14em;
-  color: #f2f2f2;
+  color: #EEE8F2;
   text-align: center;
   padding: 12px;
   animation: pulse 2.4s ease-in-out infinite;
@@ -567,7 +567,7 @@ html.loaded .home-star          { animation: starBump   var(--loop) ease-in-out 
 
 /* ============ Shorts (globe de vidéos) ============ */
 :root { --tile-frame: #ffffff; }
-html[data-theme="dark"] { --tile-frame: #2a2a30; }
+html[data-theme="dark"] { --tile-frame: #33243F; }
 .shorts-page {
   position: relative;
   width: 100%;
@@ -768,7 +768,7 @@ html[data-theme="dark"] { --tile-frame: #2a2a30; }
   position: absolute;
   inset: 0;
   border-radius: clamp(16px, 4vh, 36px);
-  background: #0c0c0f;
+  background: #271A35;
   box-shadow: 0 60px 90px -40px rgba(20, 20, 25, 0.6), inset 0 0 0 1.5px rgba(255, 255, 255, 0.18);
 }
 .overlay-screen {
@@ -839,7 +839,7 @@ html.is-maintenance, html.is-maintenance body { overflow: hidden; }
   align-items: center;
   justify-content: center;
   padding: 24px;
-  background: var(--bg, #fafaf5);
+  background: var(--bg, #FAF7FB);
 }
 .maint-bubble {
   position: relative;
@@ -847,8 +847,8 @@ html.is-maintenance, html.is-maintenance body { overflow: hidden; }
   padding: 26px 30px 24px;
   border: 1.5px solid currentColor;
   border-radius: 26px;
-  background: var(--bg, #fafaf5);
-  color: var(--ink, #15151a);
+  background: var(--bg, #FAF7FB);
+  color: var(--ink, #33243F);
   text-align: center;
   box-shadow: 6px 8px 0 currentColor;
   animation: maintIn .5s cubic-bezier(.34, 1.3, .64, 1) both;
@@ -869,7 +869,7 @@ html.is-maintenance, html.is-maintenance body { overflow: hidden; }
   width: 10px; height: 10px;
   margin-bottom: 12px;
   border-radius: 50%;
-  background: #d63f64;
+  background: #B33A58;
   animation: maintPulse 1.6s ease-in-out infinite;
 }
 .maint-title {
@@ -890,7 +890,7 @@ html.is-maintenance, html.is-maintenance body { overflow: hidden; }
   max-width: calc(100vw - 24px);
   padding: 8px 14px;
   border-radius: 999px;
-  background: #d63f64;
+  background: #B33A58;
   color: #fff;
   font: 600 12px/1.3 'IBM Plex Mono', monospace;
   text-align: center;
@@ -1017,7 +1017,7 @@ html.is-maintenance, html.is-maintenance body { overflow: hidden; }
   position: absolute;
   left: 12px; right: 12px; top: 44px; bottom: 12px;
   background: #fff;
-  color: #171717;
+  color: #271A35;
   border-radius: 8px;
   padding: 10px 16px 12px;
   display: flex;
@@ -1046,13 +1046,13 @@ html.is-maintenance, html.is-maintenance body { overflow: hidden; }
   align-items: baseline;
   height: 24px;
   padding-bottom: 8px;
-  border-bottom: 1px solid #e6e6e2;
+  border-bottom: 1px solid #E8E1EA;
   font-family: 'IBM Plex Mono', 'Courier New', monospace;
   font-size: 10px;
   letter-spacing: 0.18em;
-  color: #8a8a86;
+  color: #716380;
 }
-.contact-id { color: #171717; }
+.contact-id { color: #271A35; }
 .contact-body {
   position: relative;
   display: flex;
@@ -1068,11 +1068,11 @@ html.is-maintenance, html.is-maintenance body { overflow: hidden; }
   width: 176px; height: 176px;
   border-radius: 12px;
   overflow: hidden;
-  background: #ececea;
+  background: #E8E1EA;
   box-shadow: 0 0 0 2px #fff, 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 .contact-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
-.contact-photo svg { display: block; width: 100%; height: 100%; fill: #bdbdb8; }
+.contact-photo svg { display: block; width: 100%; height: 100%; fill: #B9ADB9; }
 .contact-info {
   flex: 1;
   min-width: 0;
@@ -1086,7 +1086,7 @@ html.is-maintenance, html.is-maintenance body { overflow: hidden; }
   font-size: clamp(22px, 8.6cqw, 34px);
   line-height: 1.05;
   letter-spacing: 0.01em;
-  color: #171717;
+  color: #271A35;
   overflow-wrap: anywhere;
 }
 .contact-last { text-transform: uppercase; }
@@ -1097,14 +1097,14 @@ html.is-maintenance, html.is-maintenance body { overflow: hidden; }
   letter-spacing: 0.1em;
   text-transform: uppercase;
   line-height: 1.4;
-  color: #8a8a86;
+  color: #716380;
 }
 /* Les lignes de contact occupent toute la largeur de la zone blanche. */
 .contact-email,
 .contact-phone {
   display: block;
   width: 100%;
-  color: #171717;
+  color: #271A35;
   text-decoration: none;
   font-size: 17px;
   line-height: 1.5;
@@ -1120,7 +1120,7 @@ html.is-maintenance, html.is-maintenance body { overflow: hidden; }
   font-size: 13.5px;
   font-style: italic;
   line-height: 1.35;
-  color: #8a8a86;
+  color: #716380;
 }
 @media (max-width: 480px) {
   /* Pochette plus haute et photo réduite : sur 358 px de large, la colonne de

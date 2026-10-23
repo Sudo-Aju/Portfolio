@@ -3,8 +3,8 @@ window.Site = (function () {
   'use strict';
 
   /* ---------- Palettes ---------- */
-  var PALETTE_MAIN = ['#B4BCAC', '#E9F072', '#EC7448', '#1C2440', '#F3D163', '#7C8CD9', '#DFEFFB', '#520D28', '#D63F64', '#3D7565'];
-  var PALETTE_CORPO = ['#DFEFFB', '#B4BCAC', '#D8D4C6', '#A8B5C9', '#1C2440', '#3D7565', '#8B93A7', '#E8E2D5', '#64748B', '#94A3B8'];
+  var PALETTE_MAIN = ['#CFC4D4', '#C8B2E3', '#CA5872', '#33243F', '#D8B5C7', '#6240B1', '#F0EAF5', '#8C2C46', '#B33A58', '#84758E'];
+  var PALETTE_CORPO = ['#F0EAF5', '#CFC4D4', '#D8CEDF', '#9789A2', '#33243F', '#84758E', '#93869D', '#E8E1EA', '#716380', '#93869D'];
 
   /* ---------- Polices ---------- */
   var GOOGLE_FONTS = ['Anton', 'Archivo', 'Bebas Neue', 'DM Serif Display', 'IBM Plex Mono', 'Space Grotesk', 'Syne', 'Oswald', 'Playfair Display', 'Barlow Condensed', 'Unbounded', 'Caveat', 'Pacifico', 'Bricolage Grotesque', 'Libre Caslon Text', 'Special Elite'];
@@ -456,7 +456,7 @@ window.Site = (function () {
   function thumbNode(item, content) {
     var wrap = document.createElement('div');
     wrap.className = 'thumb';
-    var bg = item.bg || '#1C2440';
+    var bg = item.bg || '#33243F';
     var tx = item.text || '#ffffff';
     wrap.style.background = bg;
     var card = document.createElement('div');
@@ -561,26 +561,26 @@ window.Site = (function () {
   // Les dégradés sont déclarés une fois, dans le premier SVG, et référencés
   // par id depuis la chaînette (les références url(#…) valent pour tout le
   // document).
-  var CHROME_STOPS = '<stop offset="0" stop-color="#8d9199"/><stop offset=".15" stop-color="#f7f8fa"/>' +
-    '<stop offset=".35" stop-color="#b3b8c0"/><stop offset=".5" stop-color="#ffffff"/>' +
-    '<stop offset=".68" stop-color="#8f949c"/><stop offset=".85" stop-color="#e3e5e9"/><stop offset="1" stop-color="#6c7078"/>';
+  var CHROME_STOPS = '<stop offset="0" stop-color="#84758E"/><stop offset=".15" stop-color="#FAF7FB"/>' +
+    '<stop offset=".35" stop-color="#B9ADB9"/><stop offset=".5" stop-color="#ffffff"/>' +
+    '<stop offset=".68" stop-color="#93869D"/><stop offset=".85" stop-color="#EEE8F2"/><stop offset="1" stop-color="#584866"/>';
   var HOOK_D = 'M80 90 L59 118 Q56 123 61 125 L99 125 Q104 123 101 118 Z';
   // Attache : languette plate, anneau brisé, émerillon, mousqueton triangulaire
   // dont la barre du bas passe dans la fente de la pochette (dessinée dessous).
   var CLIP_SVG = '<svg class="contact-clip" viewBox="0 0 160 134" width="160" height="134" aria-hidden="true">' +
     '<defs><linearGradient id="cc-chrome-h" x1="0" y1="0" x2="1" y2="0">' + CHROME_STOPS + '</linearGradient>' +
     '<linearGradient id="cc-chrome-v" x1="0" y1="0" x2="0" y2="1">' + CHROME_STOPS + '</linearGradient></defs>' +
-    '<rect x="66" y="0" width="28" height="60" rx="7" fill="url(#cc-chrome-h)" stroke="#5d6169" stroke-width="1"/>' +
+    '<rect x="66" y="0" width="28" height="60" rx="7" fill="url(#cc-chrome-h)" stroke="#584866" stroke-width="1"/>' +
     '<rect x="71" y="5" width="3" height="50" rx="1.5" fill="#fff" opacity=".7"/>' +
-    '<ellipse cx="80" cy="48" rx="6" ry="6.5" fill="#33363c"/>' +
-    '<circle cx="80" cy="66" r="13" fill="none" stroke="#4e525a" stroke-width="6.5"/>' +
+    '<ellipse cx="80" cy="48" rx="6" ry="6.5" fill="#33243F"/>' +
+    '<circle cx="80" cy="66" r="13" fill="none" stroke="#584866" stroke-width="6.5"/>' +
     '<circle cx="80" cy="66" r="13" fill="none" stroke="url(#cc-chrome-v)" stroke-width="4.5"/>' +
-    '<rect x="74.5" y="78" width="11" height="13" rx="3.5" fill="url(#cc-chrome-h)" stroke="#4e525a" stroke-width="1"/>' +
-    '<circle cx="80" cy="79" r="2.4" fill="#4e525a"/>' +
-    '<path d="' + HOOK_D + '" fill="none" stroke="#4e525a" stroke-width="7.5" stroke-linejoin="round"/>' +
+    '<rect x="74.5" y="78" width="11" height="13" rx="3.5" fill="url(#cc-chrome-h)" stroke="#584866" stroke-width="1"/>' +
+    '<circle cx="80" cy="79" r="2.4" fill="#584866"/>' +
+    '<path d="' + HOOK_D + '" fill="none" stroke="#584866" stroke-width="7.5" stroke-linejoin="round"/>' +
     '<path d="' + HOOK_D + '" fill="none" stroke="url(#cc-chrome-h)" stroke-width="5" stroke-linejoin="round"/>' +
     '<path d="M87 100 L97 113" stroke="#fff" stroke-width="1.2" opacity=".6"/>' +
-    '<circle cx="86.5" cy="99" r="2" fill="#4e525a"/>' +
+    '<circle cx="86.5" cy="99" r="2" fill="#584866"/>' +
     '</svg>';
   // Chaînette à billes (trait pointillé à bouts ronds) accrochée à l'anneau,
   // un cœur puis une étoile en breloques.
@@ -589,22 +589,22 @@ window.Site = (function () {
   var HEART_D = 'M0 -3 C0 -9 -9 -9 -9 -2 C-9 4 0 9 0 12 C0 9 9 4 9 -2 C9 -9 0 -9 0 -3 Z';
   var STAR_D = 'M0 -11 L2.7 -3.7 L10.5 -3.4 L4.4 1.4 L6.5 8.9 L0 4.6 L-6.5 8.9 L-4.4 1.4 L-10.5 -3.4 L-2.7 -3.7 Z';
   function beads(d) {
-    return '<path d="' + d + '" fill="none" stroke="#4e525a" stroke-width="5.4" stroke-linecap="round" stroke-dasharray="0.01 5.4"/>' +
+    return '<path d="' + d + '" fill="none" stroke="#584866" stroke-width="5.4" stroke-linecap="round" stroke-dasharray="0.01 5.4"/>' +
       '<path d="' + d + '" fill="none" stroke="url(#cc-chrome-v)" stroke-width="4" stroke-linecap="round" stroke-dasharray="0.01 5.4"/>';
   }
   function charm(d, x, y, rot, k) {
     return '<g transform="translate(' + x + ' ' + y + ') rotate(' + rot + ') scale(' + k + ')">' +
-      '<path d="' + d + '" fill="url(#cc-chrome-v)" stroke="#4e525a" stroke-width="1.2" stroke-linejoin="round"/>' +
+      '<path d="' + d + '" fill="url(#cc-chrome-v)" stroke="#584866" stroke-width="1.2" stroke-linejoin="round"/>' +
       '<path d="' + d + '" fill="none" stroke="#fff" stroke-width="1" opacity=".55" transform="scale(.62)"/>' +
       '</g>';
   }
   var CHAIN_SVG = '<svg class="contact-chain" viewBox="0 0 100 150" width="100" height="150" aria-hidden="true">' +
     beads(CHAIN_1) +
-    '<circle cx="32" cy="62" r="3" fill="none" stroke="#4e525a" stroke-width="2.2"/>' +
+    '<circle cx="32" cy="62" r="3" fill="none" stroke="#584866" stroke-width="2.2"/>' +
     '<circle cx="32" cy="62" r="3" fill="none" stroke="url(#cc-chrome-h)" stroke-width="1.4"/>' +
     charm(HEART_D, 32, 73, -8, 1.3) +
     beads(CHAIN_2) +
-    '<circle cx="37.5" cy="102" r="3" fill="none" stroke="#4e525a" stroke-width="2.2"/>' +
+    '<circle cx="37.5" cy="102" r="3" fill="none" stroke="#584866" stroke-width="2.2"/>' +
     '<circle cx="37.5" cy="102" r="3" fill="none" stroke="url(#cc-chrome-h)" stroke-width="1.4"/>' +
     charm(STAR_D, 38, 116, 12, 1.15) +
     '</svg>';

@@ -9,18 +9,18 @@
 
 .about-root {
   /* matières */
-  --kraft-shade: rgba(120, 80, 30, .10);   /* voile posé sur carton-2 */
-  --kraft-back:  rgba(60, 40, 15, .22);    /* volet arrière, plus sombre */
-  --kraft-flat:  #cfae7c;                  /* couleur unie des trous de perforation */
-  --paper:       #f7f3ea;                  /* fiche « description », étiquette, mat photo */
-  --paper-grid:  #eef1ec;                  /* fiche « cv » (quadrillé) */
-  --paper-sage:  #e6ead6;                  /* fiche « hobbies » (lignée) */
-  --paper-red:   #c9463d;                  /* fiche « créa de contenu » */
-  --postit:      #f5df7a;                  /* carte « comment j'♥ taffer » */
-  --ink-paper:   #23201c;                  /* texte sur papier, indépendant du thème */
-  --ink-red:     #c8342c;                  /* note manuscrite, tampon, filets */
-  --cream:       #f7f0e4;                  /* texte sur la fiche rouge */
-  --rule:        rgba(60, 90, 150, .16);   /* lignes / quadrillage */
+  --kraft-shade: rgba(98, 64, 177, .10);   /* voile posé sur carton-2 */
+  --kraft-back:  rgba(39, 26, 53, .22);    /* volet arrière, plus sombre */
+  --kraft-flat:  #B9ADB9;                  /* couleur unie des trous de perforation */
+  --paper:       #F6F1F8;                  /* fiche « description », étiquette, mat photo */
+  --paper-grid:  #F2ECF6;                  /* fiche « cv » (quadrillé) */
+  --paper-sage:  #EAE2F0;                  /* fiche « hobbies » (lignée) */
+  --paper-red:   #B33A58;                  /* fiche « créa de contenu » */
+  --postit:      #E8DDED;                  /* carte « comment j'♥ taffer » */
+  --ink-paper:   #33243F;                  /* texte sur papier, indépendant du thème */
+  --ink-red:     #8C2C46;                  /* note manuscrite, tampon, filets */
+  --cream:       #F8F3F9;                  /* texte sur la fiche rouge */
+  --rule:        rgba(98, 64, 177, .16);   /* lignes / quadrillage */
   --shadow-k:    .42;                      /* intensité des ombres portées */
   --type: 'Special Elite', 'Courier New', Courier, monospace;   /* machine à écrire */
   --mono: 'IBM Plex Mono', 'Courier New', monospace;            /* lecture */
@@ -62,7 +62,7 @@
   border-radius: 8px;
   background: linear-gradient(var(--kraft-back), var(--kraft-back)), url(../img/carton-2.jpg);
   background-size: 100% 100%, 260px 260px;
-  box-shadow: 0 24px 50px -24px rgba(20, 15, 5, var(--shadow-k));
+  box-shadow: 0 24px 50px -24px rgba(39, 26, 53, var(--shadow-k));
   transform: rotate(-.5deg);
 }
 .folder {
@@ -75,7 +75,7 @@
   gap: 36px;
   border-radius: 6px;
   background: url(../img/carton-2.jpg) 0 0 / 260px 260px;
-  box-shadow: 0 30px 60px -28px rgba(20, 15, 5, var(--shadow-k)), 0 2px 4px rgba(0, 0, 0, .14), inset 0 0 0 1px rgba(255, 255, 255, .22);
+  box-shadow: 0 30px 60px -28px rgba(39, 26, 53, var(--shadow-k)), 0 2px 4px rgba(0, 0, 0, .14), inset 0 0 0 1px rgba(255, 255, 255, .22);
 }
 /* Le voile teinté est un pseudo-élément (et non un dégradé dans background) :
    la texture reste strictement identique dans les deux thèmes, seul le voile
@@ -110,7 +110,7 @@
   height: 280px;
   z-index: 1;
   padding: 10px 0;
-  background: linear-gradient(rgba(60, 40, 15, .18), rgba(60, 40, 15, .18)), url(../img/carton-2.jpg);
+  background: linear-gradient(rgba(39, 26, 53, .18), rgba(39, 26, 53, .18)), url(../img/carton-2.jpg);
   background-size: 100% 100%, 260px 260px;
   border-radius: 0 8px 8px 0;
   box-shadow: 3px 2px 6px rgba(0, 0, 0, .16);
@@ -142,7 +142,7 @@
   width: 200px;
   height: 96px;
   z-index: 6;
-  color: #d8a93c;
+  color: #B33A58;
   transform: translateX(-50%);
   filter: drop-shadow(0 4px 4px rgba(0, 0, 0, .35));
 }
@@ -157,7 +157,7 @@
   z-index: 5;
   padding: 9px 14px 8px;
   background: var(--paper);
-  border: 1px solid #d9d2c2;
+  border: 1px solid #D5CCDE;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .12);
   color: var(--ink-paper);
   transform: rotate(-1.2deg);
@@ -175,7 +175,7 @@
   font: 10.5px/1.4 var(--mono);
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: #6d675c;
+  color: #716380;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -204,7 +204,7 @@
   height: var(--frame-h);
   margin: 0;
   z-index: 2;
-  background: #efe8d8;
+  background: #F2ECF6;
   border-radius: 3px;
   box-shadow: 0 10px 24px -12px rgba(0, 0, 0, .5), 0 1px 2px rgba(0, 0, 0, .15);
   transform: rotate(-1.5deg);
@@ -313,8 +313,8 @@
   width: 100%;
   height: 100%;
   padding: 12px;
-  background: #d9d5cb;
-  color: #6d675c;
+  background: #D5CCDE;
+  color: #716380;
   font: 11px/1.5 var(--type);
   letter-spacing: .18em;
   text-transform: uppercase;
@@ -331,7 +331,7 @@
   width: 77px;
   height: 58px;
   z-index: 6;
-  color: #93d3b6;
+  color: #C8B2E3;
   transform: translateX(-50%);
 }
 
@@ -409,7 +409,7 @@
   display: flex;
   flex-direction: column;
   padding: 16px 18px 14px;
-  background: linear-gradient(#ecd15f 0 12px, var(--postit) 12px);
+  background: linear-gradient(#D8B5C7 0 12px, var(--postit) 12px);
   box-shadow: 0 8px 16px -10px rgba(0, 0, 0, .4);
   color: var(--ink-paper);
   transform: rotate(4deg);
@@ -516,8 +516,8 @@
   filter: drop-shadow(0 3px 4px rgba(0, 0, 0, .28));
   pointer-events: none;
 }
-.sticker-heart { top: -18px; right: -18px; width: 56px; height: 52px; fill: #D63F64; transform: rotate(14deg); }
-.sticker-star  { right: -74px; bottom: -8px; width: 64px; height: 64px; fill: #F3D163; transform: rotate(-10deg); }
+.sticker-heart { top: -18px; right: -18px; width: 56px; height: 52px; fill: #B33A58; transform: rotate(14deg); }
+.sticker-star  { right: -74px; bottom: -8px; width: 64px; height: 64px; fill: #D8B5C7; transform: rotate(-10deg); }
 
 /* ---- Pile de fiches ---- */
 .stack { position: relative; isolation: isolate; }
@@ -574,7 +574,7 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  box-shadow: 0 22px 40px -18px rgba(20, 15, 5, var(--shadow-k));
+  box-shadow: 0 22px 40px -18px rgba(39, 26, 53, var(--shadow-k));
   opacity: 0;
   transition: opacity .4s;
   pointer-events: none;
@@ -633,7 +633,7 @@
   border: 1.5px dashed rgba(53, 87, 101, .8);
   border-radius: 7px;
   background: repeating-linear-gradient(135deg, rgba(53, 87, 101, .08) 0 5px, transparent 5px 10px);
-  color: #355765;
+  color: #51435F;
   font-size: 15px;
   transform: rotate(-4deg);
 }
@@ -643,7 +643,7 @@
   height: 66px;
   border: 2px dotted rgba(91, 119, 65, .85);
   border-radius: 44% 56% 46% 54%;
-  color: #526d39;
+  color: #716380;
   font: 700 23px/1 var(--hand);
   transform: rotate(7deg);
   box-shadow: 0 0 0 5px rgba(91, 119, 65, .08);
@@ -768,7 +768,7 @@ a.hub-chip:focus-visible { outline: 2px solid var(--cream); outline-offset: 2px;
 }
 .media-placeholder {
   border: 1px dashed rgba(35, 32, 28, .48);
-  background: repeating-linear-gradient(135deg, rgba(35, 32, 28, .08) 0 10px, transparent 10px 20px), #e9e2d6;
+  background: repeating-linear-gradient(135deg, rgba(35, 32, 28, .08) 0 10px, transparent 10px 20px), #E8E1EA;
   color: var(--ink-paper);
 }
 .media-placeholder-label {
@@ -803,9 +803,9 @@ a.hub-tile:hover, a.hub-photo:hover { transform: translateY(-2px); }
 a.hub-tile:focus-visible, a.hub-photo:focus-visible { outline: 2px solid var(--cream); outline-offset: 2px; }
 
 .hub-videos .hub-grid{align-items:start}
-.hub-tile.hub-reel{aspect-ratio:9/16;min-width:0;background:#101419}
+.hub-tile.hub-reel{aspect-ratio:9/16;min-width:0;background:#271A35}
 .hub-tile.hub-reel::before{display:none;padding:0}
-.hub-reel-frame{position:absolute;top:0;left:50%;right:auto;width:max(100%,320px);height:100%;max-width:none;transform:translateX(-50%);border:0;display:block;background:#101419}
+.hub-reel-frame{position:absolute;top:0;left:50%;right:auto;width:max(100%,320px);height:100%;max-width:none;transform:translateX(-50%);border:0;display:block;background:#271A35}
 .hub-reel-caption{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:22px 7px 7px;background:linear-gradient(transparent,rgba(0,0,0,.78));color:#fff;font:700 9px/1.3 var(--mono);letter-spacing:.03em;pointer-events:none}
 
 .hub-tile .tile-label { font-family: var(--type); }
@@ -833,7 +833,7 @@ a.hub-tile:focus-visible, a.hub-photo:focus-visible { outline: 2px solid var(--c
   top: 30px;
   width: 64px;
   height: 64px;
-  color: #c8342c;
+  color: #8C2C46;
   transform: rotate(-90deg);
   opacity: 0;
   transition: opacity .25s .25s;
@@ -845,7 +845,7 @@ a.hub-tile:focus-visible, a.hub-photo:focus-visible { outline: 2px solid var(--c
   top: -14px;
   width: 60px;
   height: 45px;
-  color: #f0c344;
+  color: #D8B5C7;
   transform: rotate(3deg);
   filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .3));
 }
@@ -897,17 +897,17 @@ a.hub-tile:focus-visible, a.hub-photo:focus-visible { outline: 2px solid var(--c
 html[data-theme="dark"] .about-root {
   --kraft-shade: rgba(40, 25, 5, .26);
   --kraft-back:  rgba(20, 12, 2, .40);
-  --kraft-flat:  #a98a5e;
-  --paper: #efe9dc;
-  --paper-grid: #e6e9e3;
-  --paper-sage: #dde2cc;
-  --postit: #ecd66f;
+  --kraft-flat:  #93869D;
+  --paper: #F2ECF6;
+  --paper-grid: #EEE8F2;
+  --paper-sage: #EAE2F0;
+  --postit: #D8B5C7;
   --shadow-k: .85;
 }
 html[data-theme="dark"] .folder {
   box-shadow: 0 40px 90px -30px rgba(0, 0, 0, .85), 0 2px 4px rgba(0, 0, 0, .4), inset 0 0 0 1px rgba(255, 255, 255, .08);
 }
-html[data-theme="dark"] .photo-empty { background: #3a3630; color: #bdb6a8; }
+html[data-theme="dark"] .photo-empty { background: #4D3D57; color: #B9ADB9; }
 
 /* ============ Bureau étroit (1001–1200 px : iPad paysage, petits portables) ============
    La colonne gauche cède 120 px à la pile pour que les quatre onglets restent
