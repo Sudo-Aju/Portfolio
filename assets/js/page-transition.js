@@ -25,6 +25,12 @@
   }
 
   var navigating = false;
+  // Back/forward cache restores the page with the shutter still closed.
+  window.addEventListener('pageshow', function (event) {
+    if (!event.persisted) return;
+    navigating = false;
+    shutter.classList.remove('is-closing', 'is-opening');
+  });
   document.addEventListener('click', function (event) {
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     var link = event.target.closest && event.target.closest('a[href]');

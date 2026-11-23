@@ -795,9 +795,6 @@
   });
 
   window.addEventListener('DOMContentLoaded', function () {
-    if (!document.querySelector('.topbar')) Site.mountChrome();
-    // Même sans contenu (API et seed injoignables), le dossier est dessiné
-    // avec ses objets et ses fiches vides : jamais de « coming soon ».
-    Site.loadContent().then(build, function () { build(null); });
+    build(null);
   });
 })();

@@ -1664,7 +1664,7 @@ build();window.addEventListener('load',build);if(window.ResizeObserver){new Resi
 (function(){
  if(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches)return;
  var btn=document.getElementById('dropBtn'),stage=document.getElementById('dropStage');if(!btn||!stage)return;var btnT=btn.querySelector('.dbt'),labEl=document.querySelector('#dropfun .df-lab');
- var M=Matter,engine=null,render=null,runner=null,bodies=[],CAP=180,started=false,fadingAll=false,taps=0,gflip=false,walkers=[],rafId=null,last=0,actx=null;
+ var M=window.Matter,engine=null,render=null,runner=null,bodies=[],CAP=180,started=false,fadingAll=false,taps=0,gflip=false,walkers=[],rafId=null,last=0,actx=null;
  var COLORS=['#B33A58','#6240B1','#FFFFFF','#271A35','#EEDCE2'];
  var HEARTS=[];
  var STARS=['#B33A58','#6240B1','#D8B5C7','#FFFFFF'];
@@ -1698,7 +1698,7 @@ build();window.addEventListener('load',build);if(window.ResizeObserver){new Resi
   
   for(i=walkers.length-1;i>=0;i--){if(walkers[i].dead){if(walkers[i].wrap.parentNode)walkers[i].wrap.parentNode.removeChild(walkers[i].wrap);walkers.splice(i,1);}}
   if(walkers.length){rafId=requestAnimationFrame(loop);}else{rafId=null;last=0;}}
- function spawnCapy(){var vw=window.innerWidth,vh=window.innerHeight;var dir=Math.random()<0.5?1:-1;var wpx=52+Math.random()*40;var hpx=wpx;var y0=vh*(0.34+Math.random()*0.42);var g=Math.random()<0.32;var wrap=document.createElement('div');wrap.className='capy';wrap.style.width=wpx+'px';var flip=document.createElement('div');flip.className='cflip';var body=document.createElement('div');body.className='cbody';body.textContent=pickEmo();body.style.fontSize=wpx+'px';flip.appendChild(body);wrap.appendChild(flip);stage.appendChild(wrap);var x=dir>0?(-wpx-40):(vw+40);var k={wrap:wrap,flip:flip,body:body,x:x,y0:y0,w:wpx,h:hpx,dir:dir,speed:62+Math.random()*72,phase:Math.random()*6,bumpUntil:0,born:(window.performance&&performance.now?performance.now():Date.now()),dead:false,leaving:false};setFace(k);wrap.style.transform='translate('+x+'px,'+y0+'px)';wrap.addEventListener('click',function(){poke(k);});wrap.addEventListener('touchstart',function(){poke(k);},{passive:true});walkers.push(k);if(walkers.length>18){fadeOut(walkers[0]);}if(!rafId){last=0;rafId=requestAnimationFrame(loop);}}
+ function spawnCapy(){var vw=window.innerWidth,vh=window.innerHeight;var dir=Math.random()<0.5?1:-1;var wpx=52+Math.random()*40;var hpx=wpx;var y0=vh*(0.34+Math.random()*0.42);var g=Math.random()<0.32;var wrap=document.createElement('div');wrap.className='capy';wrap.style.width=wpx+'px';var flip=document.createElement('div');flip.className='cflip';var body=document.createElement('div');body.className='cbody';body.textContent=pickEmo();body.style.fontSize=wpx+'px';flip.appendChild(body);wrap.appendChild(flip);stage.appendChild(wrap);var x=dir>0?(-wpx-40):(vw+40);var k={wrap:wrap,flip:flip,body:body,x:x,y0:y0,w:wpx,h:hpx,dir:dir,speed:62+Math.random()*72,phase:Math.random()*6,bumpUntil:0,born:(window.performance&&performance.now?performance.now():Date.now()),dead:false,leaving:false};setFace(k);wrap.style.transform='translate('+x+'px,'+y0+'px)';wrap.addEventListener('pointerdown',function(){poke(k);});walkers.push(k);if(walkers.length>18){fadeOut(walkers[0]);}if(!rafId){last=0;rafId=requestAnimationFrame(loop);}}
  function start(){if(started)return;started=true;engine=M.Engine.create();engine.world.gravity.y=1;render=M.Render.create({element:stage,engine:engine,options:{width:W(),height:H(),background:'transparent',wireframes:false,pixelRatio:window.devicePixelRatio||1}});buildWalls();runner=M.Runner.create();M.Runner.run(runner,engine);M.Render.run(render);M.Events.on(engine,'afterUpdate',fade);window.addEventListener('resize',function(){render.options.width=W();render.options.height=H();render.canvas.width=W()*(window.devicePixelRatio||1);render.canvas.height=H()*(window.devicePixelRatio||1);M.Render.lookAt(render,{min:{x:0,y:0},max:{x:W(),y:H()}});buildWalls();});}
  function rain(){taps++;spawnCapy();if(Math.random()<0.4){setTimeout(spawnCapy,220+Math.random()*420);}react();}
  btn.addEventListener('click',rain);
@@ -1816,7 +1816,7 @@ build();window.addEventListener('load',build);if(window.ResizeObserver){new Resi
  var cv=document.getElementById('phPc');if(!cv)return;var ctx=cv.getContext('2d');
  var W=0,H=0,dpr=1,particles=[],mouse={x:-9999,y:-9999},fine=matchMedia('(pointer:fine)').matches;
  var cols=['#B33A58','#B33A58','#B33A58','#271A35','#6240B1'],PSIZE=2.9;
- function size(){dpr=Math.min(window.devicePixelRatio||1,2);var r=cv.getBoundingClientRect();W=Math.max(1,r.width);H=Math.max(1,r.height);cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);}
+ function size(){dpr=Math.min(window.devicePixelRatio||1,2);var r=cv.getBoundingClientRect();W=Math.max(1,Math.floor(r.width));H=Math.max(1,Math.floor(r.height));cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);}
  function build(){
   var off=document.createElement('canvas');off.width=W;off.height=H;var o=off.getContext('2d');
   o.fillStyle='#000';o.textAlign='center';o.textBaseline='middle';
@@ -1848,8 +1848,8 @@ build();window.addEventListener('load',build);if(window.ResizeObserver){new Resi
  function init(){size();build();}
  cv.addEventListener('pointermove',function(e){var r=cv.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top;});
  cv.addEventListener('pointerleave',function(){mouse.x=-9999;mouse.y=-9999;});
- var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(init,200);});
- function start(){if(matchMedia('(max-width:680px)').matches)return;init();requestAnimationFrame(frame);}
+ var rt,running=false;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){if(running)init();else start();},200);});
+ function start(){if(running||matchMedia('(max-width:680px)').matches)return;running=true;init();requestAnimationFrame(frame);}
  if(document.fonts&&document.fonts.load){document.fonts.load('700 100px Anton').then(function(){return document.fonts.ready;}).then(start).catch(start);}else{start();}
 })();
 </script>
