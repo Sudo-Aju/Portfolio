@@ -646,8 +646,8 @@
     // `photo` (ancien champ unique) reste la première, puis `photos`, sans doublon.
     var photos = [];
     [a.photo].concat(a.photos, [
-      'assets/media/profile/pfp1.png',
-      'assets/media/profile/pfp2.png'
+      'assets/media/profile/pfp1-800.webp',
+      'assets/media/profile/pfp2-800.webp'
     ]).forEach(function (u) { if (u && photos.indexOf(u) === -1) photos.push(u); });
     var dots = buildPhotos(frame, photos, name);
     frame.appendChild(useSvg('clip clip-photo', 'ab-bulldog-logo', '0 0 96 72'));
