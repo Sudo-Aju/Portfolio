@@ -2,9 +2,14 @@
   var projects = [{"title":"Fracture","cover":"assets/media/github/Fracture/Assets/Zine-800.webp","label":"Embedded electronics · Mechanical keyboard","repo":"https://github.com/Sudo-Aju/Fracture"},{"title":"Galatchi","cover":"assets/media/github/Galatchi/Gallery/GalatchiZine-800.webp","label":"Embedded electronics · Handheld project","repo":"https://github.com/Sudo-Aju/Galatchi"},{"title":"Elfin","cover":"assets/media/github/Elfin/Gallery/ElfinZine-800.webp","label":"Embedded electronics · Microcontroller","repo":"https://github.com/Sudo-Aju/Elfin"},{"title":"AliPayBot","cover":"assets/media/github/AliPayBot/Gallery/Zine-800.webp","label":"Embedded electronics · Robotics","repo":"https://github.com/Sudo-Aju/AliPayBot"},{"title":"Build Guild · Hyderabad","cover":"assets/media/github/BuildGuildHyderabad/poster2f-800.webp","label":"Community · Hardware hackathon","repo":"https://github.com/Sudo-Aju/BuildGuildHyderabad"},{"title":"UsbHub","cover":"assets/media/github/UsbHub/README/README-detail-1-800.webp","label":"Embedded electronics · USB hub","repo":"https://github.com/Sudo-Aju/UsbHub"},{"title":"SpiderBlink","cover":"assets/media/github/SpiderBlink/Gallery/Zine-800.webp","label":"Embedded electronics · LED project","repo":"https://github.com/Sudo-Aju/SpiderBlink"},{"title":"Rova","cover":"assets/media/github/Rova/Gallery/zine-800.webp","label":"Embedded electronics · Hardware project","repo":"https://github.com/Sudo-Aju/Rova"}];
   var grid=document.getElementById('featuredProjectGrid');
   if(!grid)return;
-  projects.forEach(function(project){
+  var bands=[['#f2774e','#14213d'],['#8eb9b1','#eff7f4'],['#e74b70','#ffe45e'],['#d8bd54','#171b35'],['#869ce0','#f6f1e9'],['#b4c844','#18213b'],['#a3b8b5','#dc4169'],['#efa0bd','#f8f2ed']];
+  var textures=['carton-1.jpg','carton-2.jpg','carton-3.jpg','carton-4.jpg'];
+  projects.forEach(function(project,i){
     var card=document.createElement('a');
     card.className='featured-project-card';
+    card.style.setProperty('--band',bands[i%bands.length][0]);
+    card.style.setProperty('--band-ink',bands[i%bands.length][1]);
+    card.style.setProperty('--texture','url("'+new URL('assets/img/'+textures[i%textures.length],document.baseURI).href+'")');
     card.href=project.repo;
     card.target='_blank';
     card.rel='noopener noreferrer';

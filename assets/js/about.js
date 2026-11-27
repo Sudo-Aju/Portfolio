@@ -61,8 +61,8 @@
     cards: {
       desc: {
         label: 'About Me', label_en: 'About Me',
-        text: 'Azmeer Pirani is a video editor, graphic designer, and embedded-electronics builder. He organised three major Hyderabad events: Haven (300+), Blueprint (150+), and Boba Bash (100+).',
-        text_en: 'Azmeer Pirani is a video editor, graphic designer, and embedded-electronics builder. He organised three major Hyderabad events: Haven (300+), Blueprint (150+), and Boba Bash (100+).',
+        text: 'Azmeer Pirani is a video editor, graphic designer, and embedded-electronics builder. He organised three major Hyderabad events: Haven (150+), Blueprint (150+), and Boba Bash (100+).',
+        text_en: 'Azmeer Pirani is a video editor, graphic designer, and embedded-electronics builder. He organised three major Hyderabad events: Haven (150+), Blueprint (150+), and Boba Bash (100+).',
       },
       cv: {
         label: 'Creative & Technical', label_en: 'Creative & Technical',
