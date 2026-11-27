@@ -62,7 +62,7 @@
   border-radius: 8px;
   background: linear-gradient(var(--kraft-back), var(--kraft-back)), url(../img/carton-2.jpg);
   background-size: 100% 100%, 260px 260px;
-  box-shadow: 0 24px 50px -24px rgba(20,33,61, var(--shadow-k));
+  box-shadow: none;
   transform: rotate(-.5deg);
 }
 .folder {
@@ -75,7 +75,7 @@
   gap: 36px;
   border-radius: 6px;
   background: url(../img/carton-2.jpg) 0 0 / 260px 260px;
-  box-shadow: 0 30px 60px -28px rgba(20,33,61, var(--shadow-k)), 0 2px 4px rgba(0, 0, 0, .14), inset 0 0 0 1px rgba(255, 255, 255, .22);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .22);
 }
 /* Le voile teinté est un pseudo-élément (et non un dégradé dans background) :
    la texture reste strictement identique dans les deux thèmes, seul le voile
@@ -113,7 +113,7 @@
   background: linear-gradient(rgba(20,33,61, .18), rgba(20,33,61, .18)), url(../img/carton-2.jpg);
   background-size: 100% 100%, 260px 260px;
   border-radius: 0 8px 8px 0;
-  box-shadow: 3px 2px 6px rgba(0, 0, 0, .16);
+  box-shadow: none;
   writing-mode: vertical-rl;
   font: 13px/34px var(--type);
   letter-spacing: .2em;
@@ -131,7 +131,7 @@
 .clip {
   position: absolute;
   overflow: visible;
-  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, .35));
+  filter:none;
   pointer-events: none;
 }
 /* Grande bulldog dorée : 96 × 72 en « meet » dans 200 × 96 → 128 × 96 visuels,
@@ -144,7 +144,7 @@
   z-index: 6;
   color: #B33A58;
   transform: translateX(-50%);
-  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, .35));
+  filter:none;
 }
 
 /* Étiquette dactylographiée, scotchée. */
@@ -158,7 +158,7 @@
   padding: 9px 14px 8px;
   background: var(--paper);
   border: 1px solid #E4D9C6;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .12);
+  box-shadow: none;
   color: var(--ink-paper);
   transform: rotate(-1.2deg);
 }
@@ -186,7 +186,7 @@
   width: 90px;
   height: 22px;
   background: rgba(255, 250, 225, .55);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, .08);
+  box-shadow: none;
   clip-path: polygon(0 0, 100% 0, 97% 25%, 100% 50%, 97% 75%, 100% 100%, 0 100%, 3% 75%, 0 50%, 3% 25%);
   pointer-events: none;
 }
@@ -206,7 +206,7 @@
   z-index: 2;
   background: #EFE6D6;
   border-radius: 3px;
-  box-shadow: 0 10px 24px -12px rgba(0, 0, 0, .5), 0 1px 2px rgba(0, 0, 0, .15);
+  box-shadow: none;
   transform: rotate(-1.5deg);
   transition: transform .4s ease;
 }
@@ -247,7 +247,7 @@
   inset: 20px 20px 24px;
   padding: 7px;
   background: #fff;
-  box-shadow: 0 6px 14px -6px rgba(0, 0, 0, .45);
+  box-shadow: none;
   transform: var(--to);
   transition: transform .4s cubic-bezier(.22, .8, .2, 1), opacity .4s;
 }
@@ -359,7 +359,7 @@
   overflow: hidden;
   hyphens: auto;
   overflow-wrap: anywhere;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, .25);
+  box-shadow: none;
   transform: rotate(-12deg);
   pointer-events: none;
 }
@@ -410,7 +410,7 @@
   flex-direction: column;
   padding: 16px 18px 14px;
   background: linear-gradient(#D8B5C7 0 12px, var(--postit) 12px);
-  box-shadow: 0 8px 16px -10px rgba(0, 0, 0, .4);
+  box-shadow: none;
   color: var(--ink-paper);
   transform: rotate(4deg);
   transition: transform .4s ease;
@@ -459,8 +459,8 @@
   position: absolute;
   inset: 0;
   background: rgba(20, 15, 5, .38);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  backdrop-filter:blur(6px);
 }
 .how-card.how-big {
   position: relative;
@@ -470,7 +470,7 @@
   max-height: min(80vh, 660px);
   padding: 28px 32px 28px;
   transform: rotate(-1.5deg) scale(.92);
-  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .55), 0 2px 6px rgba(0, 0, 0, .2);
+  box-shadow: none;
   cursor: default;
   transition: transform .3s cubic-bezier(.2, .8, .2, 1);
 }
@@ -513,7 +513,7 @@
   stroke: #fff;
   stroke-width: 6;
   stroke-linejoin: round;
-  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, .28));
+  filter:none;
   pointer-events: none;
 }
 .sticker-heart { top: -18px; right: -18px; width: 56px; height: 52px; fill: #B33A58; transform: rotate(14deg); }
@@ -543,7 +543,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   cursor: pointer;
-  box-shadow: 0 -3px 6px rgba(0, 0, 0, .08);
+  box-shadow: none;
   -webkit-appearance: none;
   appearance: none;
 }
@@ -551,7 +551,7 @@
 .tab[data-key="cv"]      { left: 25.33%; background: var(--paper-grid); }
 .tab[data-key="hobbies"] { left: 50.67%; background: var(--paper-sage); }
 .tab[data-key="content"] { left: 76%; background: var(--paper-red); color: var(--cream); }
-.tab:not([data-depth="0"]) { filter: brightness(.96); }
+.tab:not([data-depth="0"]) { filter:brightness(.96); }
 .tab:focus-visible { outline: 2px solid var(--ink-red); outline-offset: 3px; }
 
 .card {
@@ -564,7 +564,7 @@
   border-radius: 3px;
   background: var(--paper);
   color: var(--ink-paper);
-  box-shadow: 0 2px 3px rgba(0, 0, 0, .14);
+  box-shadow: none;
 }
 .card:not(.is-front) { cursor: pointer; }
 /* L'ombre portée de la fiche de devant vit sur un pseudo-élément : on n'anime
@@ -574,7 +574,7 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  box-shadow: 0 22px 40px -18px rgba(20,33,61, var(--shadow-k));
+  box-shadow: none;
   opacity: 0;
   transition: opacity .4s;
   pointer-events: none;
@@ -596,7 +596,7 @@
 .card[data-key="content"] {
   background: var(--paper-red);
   color: var(--cream);
-  box-shadow: 0 2px 3px rgba(0, 0, 0, .14), inset 0 0 0 1px rgba(255, 255, 255, .22);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .22);
 }
 .card[data-key="content"] .card-title::after { background: var(--cream); }
 /* Small profile cards get their own visual signature: an event stamp, a skills badge, and a community seal. */
@@ -763,7 +763,7 @@ a.hub-chip:focus-visible { outline: 2px solid var(--cream); outline-offset: 2px;
   overflow: hidden;
   border-radius: 3px;
   background: rgba(0, 0, 0, .18);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, .22);
+  box-shadow: none;
   color: inherit;
 }
 .media-placeholder {
@@ -847,7 +847,7 @@ a.hub-tile:focus-visible, a.hub-photo:focus-visible { outline: 2px solid var(--c
   height: 45px;
   color: #D8B5C7;
   transform: rotate(3deg);
-  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .3));
+  filter:none;
 }
 
 /* ---- Profondeur : portée par la fiche ET par son onglet ---- */
@@ -905,7 +905,7 @@ html[data-theme="dark"] .about-root {
   --shadow-k: .85;
 }
 html[data-theme="dark"] .folder {
-  box-shadow: 0 40px 90px -30px rgba(0, 0, 0, .85), 0 2px 4px rgba(0, 0, 0, .4), inset 0 0 0 1px rgba(255, 255, 255, .08);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08);
 }
 html[data-theme="dark"] .photo-empty { background: #3d4557; color: #ADB1B9; }
 
@@ -1008,9 +1008,9 @@ html[data-theme="dark"] .photo-empty { background: #3d4557; color: #ADB1B9; }
     z-index: -1;
     background: var(--paper);
     border-radius: 3px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, .14);
+    box-shadow: none;
   }
-  .stack::after { left: 12px; right: -8px; top: 108px; bottom: -10px; filter: brightness(.97); }
+  .stack::after { left: 12px; right: -8px; top: 108px; bottom: -10px; filter:brightness(.97); }
   .tabs {
     order: -1;
     position: static;
@@ -1031,8 +1031,8 @@ html[data-theme="dark"] .photo-empty { background: #3d4557; color: #ADB1B9; }
     transform: none !important;
     animation: none !important;
   }
-  .tab[aria-selected="true"] { box-shadow: 0 3px 8px rgba(0, 0, 0, .18); filter: none; }
-  .tab[aria-selected="false"] { filter: brightness(.94); box-shadow: inset 0 -5px 8px -6px rgba(0, 0, 0, .35); }
+  .tab[aria-selected="true"] { box-shadow: none; filter:none; }
+  .tab[aria-selected="false"] { filter:brightness(.94); box-shadow: inset 0 -5px 8px -6px rgba(0, 0, 0, .35); }
 
   .card:not(.is-front) { display: none; }
   .card.is-front, .card.is-front.lifting {

@@ -154,7 +154,7 @@ html[data-theme="dark"] .icon-moon { display: block; }
 .home-btn:hover { transform: scale(1.08); }
 /* Le logo est noir : en mode sombre on l'inverse plutôt que de charger une
    seconde image. */
-html[data-theme="dark"] .home-btn img { filter: invert(1); }
+html[data-theme="dark"] .home-btn img { filter:invert(1); }
 
 @media (max-width: 860px) {
   :root { --chrome-h: 132px; }
@@ -244,8 +244,8 @@ html.intro .site-controls {
   opacity: 0;
 }
 @keyframes letterIn {
-  from { opacity: 0; transform: translateY(26px) scale(0.94); filter: blur(9px); }
-  to   { opacity: 1; transform: none; filter: blur(0); }
+  from { opacity: 0; transform: translateY(26px) scale(0.94); filter:blur(9px); }
+  to   { opacity: 1; transform: none; filter:blur(0); }
 }
 @keyframes exclaIn {
   0%   { opacity: 0; transform: scale(0.4) rotate(-16deg); }
@@ -253,8 +253,8 @@ html.intro .site-controls {
   100% { opacity: 1; transform: none; }
 }
 @keyframes scriptIn {
-  from { opacity: 0; transform: translate(-50%, -50%) scale(1.06); filter: blur(10px); }
-  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(0); }
+  from { opacity: 0; transform: translate(-50%, -50%) scale(1.06); filter:blur(10px); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); filter:blur(0); }
 }
 @keyframes starIn {
   0%   { opacity: 0; transform: scale(0.3) translateY(12px); }
@@ -360,7 +360,7 @@ html.loaded .home-star          { animation: starBump   var(--loop) ease-in-out 
   position: absolute;
   border: 1.5px solid #ffffff;
   border-bottom: none;
-  box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.08);
+  box-shadow: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -425,12 +425,12 @@ html.loaded .home-star          { animation: starBump   var(--loop) ease-in-out 
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.22);
+  box-shadow: none;
   transition: transform 0.15s ease, box-shadow 0.2s ease;
 }
 .divider-close:hover {
   transform: scale(1.1);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.28);
+  box-shadow: none;
 }
 /* Étiquettes de projet : soudées au panneau, mais derrière lui en profondeur. */
 .mini-tabs {
@@ -457,7 +457,7 @@ html.loaded .home-star          { animation: starBump   var(--loop) ease-in-out 
   transform: translateY(5px);
   /* Ombre interne : l'onglet inactif paraît enfoncé derrière le panneau, sans
      transparence (le grand titre ne doit pas transparaître) ni changement de teinte. */
-  box-shadow: inset 0 -7px 11px -7px rgba(0, 0, 0, 0.45), 0 -2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 -7px 11px -7px rgba(0, 0, 0, 0.45);
   white-space: nowrap;
   max-width: 360px;
   overflow: hidden;
@@ -467,7 +467,7 @@ html.loaded .home-star          { animation: starBump   var(--loop) ease-in-out 
 /* L'onglet actif affleure le panneau : aucun creux, une ombre portée plus marquée. */
 .mini-tab.active {
   transform: translateY(0);
-  box-shadow: 0 -5px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: none;
 }
 /* Rectangle texturé, même matière que l'intercalaire mais 10 % plus foncé.
    Il remplit la hauteur disponible ; sa largeur découle du 16:9 du player. */
@@ -488,7 +488,7 @@ html.loaded .home-star          { animation: starBump   var(--loop) ease-in-out 
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.26);
+  box-shadow: none;
 }
 .divider-player {
   flex: none;
@@ -545,7 +545,7 @@ html.loaded .home-star          { animation: starBump   var(--loop) ease-in-out 
   text-overflow: ellipsis;
   border: 1.5px solid #ffffff;
   border-radius: 4px;
-  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.32);
+  box-shadow: none;
   pointer-events: none;
 }
 .divider-desc {
@@ -630,13 +630,13 @@ html[data-theme="dark"] { --tile-frame: #232C40; }
   padding: 2px;
   border-radius: 4px;
   background: var(--tile-frame);
-  box-shadow: 0 10px 24px -12px rgba(20, 20, 25, 0.5), 0 1px 2px rgba(0, 0, 0, 0.12);
+  box-shadow: none;
   transition: transform 0.28s cubic-bezier(0.22, 0.9, 0.24, 1), box-shadow 0.28s ease;
 }
 .tile.front:hover .tile-inner,
 .tile:focus-visible .tile-inner {
   transform: scale(1.08);
-  box-shadow: 0 18px 34px -14px rgba(20, 20, 25, 0.55), 0 2px 4px rgba(0, 0, 0, 0.14);
+  box-shadow: none;
 }
 /* Vignette (partagée avec l'aperçu de l'admin) : carte colorée avec le
    titre, recouverte par l'image dès qu'elle est chargée. */
@@ -722,7 +722,7 @@ html[data-theme="dark"] { --tile-frame: #232C40; }
   text-transform: uppercase;
   letter-spacing: 0.06em;
   white-space: nowrap;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  box-shadow: none;
   pointer-events: none;
 }
 .tile.front:hover .tile-label,
@@ -751,8 +751,8 @@ html[data-theme="dark"] { --tile-frame: #232C40; }
 .shorts-backdrop.on,
 .contact-backdrop.on {
   background: color-mix(in srgb, var(--bg) 74%, transparent);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
   pointer-events: auto;
 }
 .shorts-overlay {
@@ -769,7 +769,7 @@ html[data-theme="dark"] { --tile-frame: #232C40; }
   inset: 0;
   border-radius: clamp(16px, 4vh, 36px);
   background: #14213D;
-  box-shadow: 0 60px 90px -40px rgba(20, 20, 25, 0.6), inset 0 0 0 1.5px rgba(255, 255, 255, 0.18);
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.18);
 }
 .overlay-screen {
   position: absolute;
@@ -850,7 +850,7 @@ html.is-maintenance, html.is-maintenance body { overflow: hidden; }
   background: var(--bg, #FCFAF6);
   color: var(--ink, #232C40);
   text-align: center;
-  box-shadow: 6px 8px 0 currentColor;
+  box-shadow: none;
   animation: maintIn .5s cubic-bezier(.34, 1.3, .64, 1) both;
 }
 /* Queue de la bulle. */
@@ -966,7 +966,7 @@ html.is-maintenance, html.is-maintenance body { overflow: hidden; }
   height: 134px;
   position: relative;
   z-index: 1;
-  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.3));
+  filter:none;
 }
 /* Accrochée à l'anneau (centre à 66 px du haut), par-dessus la pochette. */
 .contact-chain {
@@ -978,7 +978,7 @@ html.is-maintenance, html.is-maintenance body { overflow: hidden; }
   z-index: 3;
   transform-origin: 41px 9px;
   pointer-events: none;
-  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.3));
+  filter:none;
 }
 /* Pochette plastique : dégradés blancs transparents, liseré, ombre portée.
    Remonte de 22 px sous l'attache : la barre du mousqueton traverse la fente. */
@@ -991,10 +991,9 @@ html.is-maintenance, html.is-maintenance body { overflow: hidden; }
   border-radius: 16px;
   background: linear-gradient(160deg, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0.28) 35%, rgba(255, 255, 255, 0.12) 55%, rgba(255, 255, 255, 0.4) 100%);
   border: 1px solid rgba(90, 95, 105, 0.5);
-  box-shadow: 0 34px 60px -24px rgba(0, 0, 0, 0.5), 0 8px 18px -8px rgba(0, 0, 0, 0.25),
-    inset 0 0 0 1.5px rgba(255, 255, 255, 0.7), inset 0 0 22px rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(1.5px);
-  -webkit-backdrop-filter: blur(1.5px);
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.7), inset 0 0 22px rgba(255, 255, 255, 0.35);
+  backdrop-filter:blur(1.5px);
+  -webkit-backdrop-filter:blur(1.5px);
 }
 .contact-slot {
   position: absolute;
@@ -1003,7 +1002,7 @@ html.is-maintenance, html.is-maintenance body { overflow: hidden; }
   transform: translateX(-50%);
   border-radius: 5px;
   background: rgba(30, 32, 38, 0.5);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px 0 rgba(255, 255, 255, 0.65);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6);
 }
 .contact-gloss {
   position: absolute;
@@ -1023,7 +1022,7 @@ html.is-maintenance, html.is-maintenance body { overflow: hidden; }
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25), inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
   container-type: inline-size;
 }
 .contact-card [hidden] { display: none; }
@@ -1069,7 +1068,7 @@ html.is-maintenance, html.is-maintenance body { overflow: hidden; }
   border-radius: 12px;
   overflow: hidden;
   background: #E6DCCB;
-  box-shadow: 0 0 0 2px #fff, 0 2px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 2px #fff;
 }
 .contact-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
 .contact-photo svg { display: block; width: 100%; height: 100%; fill: #ADB1B9; }

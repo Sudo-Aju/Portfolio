@@ -3,7 +3,7 @@
 .repo-projects-head h2{font-family:var(--display);font-size:clamp(32px,5vw,58px);line-height:.98;letter-spacing:-.035em;margin:8px 0 14px;color:var(--ink)}
 .repo-projects-head p{color:var(--ink-soft);font-size:16px;line-height:1.55}
 .repo-media-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;align-items:start}
-.repo-media-card{min-width:0;border:1px solid var(--line-2);border-radius:16px;background:#fff;overflow:hidden;box-shadow:0 20px 50px -38px rgba(20,33,61,.45)}
+.repo-media-card{min-width:0;border:1px solid var(--line-2);border-radius:16px;background:#fff;overflow:hidden;box-shadow:none}
 .repo-media-card summary{position:relative;display:block;cursor:pointer;list-style:none}
 .repo-media-card summary::-webkit-details-marker{display:none}
 .repo-media-cover{display:block;width:100%;height:230px;object-fit:contain;background:#FAF5EC}
@@ -28,7 +28,7 @@
 
 .repo-media-item img{cursor:zoom-in}
 .repo-media-item img:focus-visible{outline:3px solid var(--brand);outline-offset:3px}
-.repo-lightbox{position:fixed;inset:0;margin:auto;padding:18px;width:fit-content;max-width:94vw;max-height:94vh;overflow:visible;border:1px solid rgba(255,255,255,.22);border-radius:14px;background:rgba(14,24,34,.97);color:#fff;box-shadow:0 24px 90px rgba(0,0,0,.55)}
+.repo-lightbox{position:fixed;inset:0;margin:auto;padding:18px;width:fit-content;max-width:94vw;max-height:94vh;overflow:visible;border:1px solid rgba(255,255,255,.22);border-radius:14px;background:rgba(14,24,34,.97);color:#fff;box-shadow:none}
 .repo-lightbox[open]{animation:repoLightboxIn .2s ease both}
 .repo-lightbox::backdrop{background:rgba(5,10,16,.82);backdrop-filter:blur(5px)}
 .repo-lightbox-frame{display:grid;justify-items:center;gap:10px;margin:0;padding-top:24px}
